@@ -33,16 +33,16 @@ def test(user_url):
     sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
     user_info = sp.me()
     user_record = user_info['id']
-    fp = open(r"@/data/spotvac_users.txt", 'a+')
+    fp = open(r"spotvac_users.txt", 'a+')
     fp.write('\n'+user_record)
-    fr = open(r"@/data/spotvac_users.txt", 'r')
+    fr = open(r"spotvac_users.txt", 'r')
     num_lines = len(fr.readlines())
     
 
     return num_lines
 
 def counter_update():
-    fr = open(r"@/data/spotvac_users.txt", 'r')
+    fr = open(r"spotvac_users.txt", 'r')
     num_lines = len(fr.readlines())
     num_lines = '{:,}'.format(num_lines)
     return num_lines
