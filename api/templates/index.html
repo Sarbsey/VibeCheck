@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SpotVac | Playlist Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script src="{{ url_for('static', filename='index_code.js') }}"></script>
+
+</head>
+
+<!-- If developing further, consider using bootstrap as a html,css,js library 
+also consider React for interactivity -->
+
+<body>  
+    <div class="master-contianer">
+        <div class="master">
+            <header id="header" class="header header-colors">
+                <div class="flex-box">
+                    <a class="logo logo-link" href="">
+                        SpotVac | Playlist Generator
+                    </a>
+                </div>
+                <nav class="nav-header">
+                    <ul class="header-unordered-list header-colors unordered-list-style-1">
+                        <li class="list-item-navigation">
+                            <a class="logo-link" href="#about-section">About</a>
+                            <!-- Add buttons for these later -->
+                        </li>
+                        <li class="list-item-navigation">
+                            <a class="logo-link" href="/documentation">Documentation</a>
+                        </li>
+                    </ul>
+                </nav>
+                <!--           
+                <div class="log-in-button"><-- Not implementing this for a while  -> Welcome!</div>
+                <div class="mini-container"><-- Not implementing this for a long while -></div>
+                -->
+                
+            </header>
+        
+            <!-- Contains main content -->
+            <div class="main-content-container">
+                <main class="main" id="main">
+                    <!-- Contains at the same level as main-content-container -->
+                    <div class="page-content-container">
+                        <div class="process-launch-container">
+                            <div class="process-launch">
+                            <!-- This is basically the exact same container, but allows for cool shit if I get to it later -->
+                                <div class="launch-pretext">
+                                    <h1 class="h1-launch-pretext pretext-color">Sort all of your music with just one click!</h1>
+                                    <!-- Make a button to count how many people use SpotVac -->
+                                    <h2 class="h2-launch-pretext pretext-color"><label  id="count"></label><!-- counter --> Libraries sorted so far</h2>
+                                </div>
+                                <div class="launch-button-container">
+
+
+
+                                    <form action="{{ url_for('launch_spotvac') }}" method="POST">
+                                        <input name="url-input" type="text" class="username-input" placeholder="open.spotify.com/user/&#60user-id&#62">
+                                        <button class="launch-button" type="submit" onclick="performPost(), update()">
+                                            <span class="launch-button-text button-color">Sort!</span>
+                                        </button>
+                                    </form>
+
+                                
+
+                                    
+                                    
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="process-description-content-container">
+                            <section class="process-description" id="process-description">
+                                <div class="processs-description-content">
+                                    <div class="tab">
+                                        <a class="anchor" id="about-section"></a>
+                                        <h1 class="about">What does SpotVac do?</h1>
+                                        <p class="about">Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.</p>
+                                        <div class="tab-container">
+                                            <button class="tablinks" onclick="openDialogue(event, '1')" id="defaultOpen">Button</button>
+                                            <!--<img src="https://www.freeiconspng.com/thumbs/greater-than-sign-icon/greater-than-sign-icon-30.png">-->
+                                            <button class="tablinks" onclick="openDialogue(event, '2')">Playlists</button>
+                                            <button class="tablinks" onclick="openDialogue(event, '3')">Spotify Data</button>
+                                            <button class="tablinks" onclick="openDialogue(event, '4')">Analysis</button>
+                                            <button class="tablinks" onclick="openDialogue(event, '5')">Generator</button>
+                                            <button class="tablinks" onclick="openDialogue(event, '6')">Enjoy!</button>
+                                        </div>
+                                    </div>
+                                    <div id="1" class="tabcontent">
+                                        <h3 class="list-item-description">Click the button and sit back as SpotVac works</h3>
+                                        <p>Filler text to be written later</p>
+                                    </div>
+                                    <div id="2" class="tabcontent">
+                                        <h3 class="list-item-description">Determine what playlists you want sorted</h3>
+                                        <p>Filler text to be written later</p>
+                                    </div>
+                                    <div id="3" class="tabcontent">
+                                        <h3 class="list-item-description">SpotVac collects data about your publicly available songs</h3>
+                                        <p>Filler text to be written later</p>
+                                    </div>
+                                    <div id="4" class="tabcontent">
+                                        <h3 class="list-item-description">These songs are analyzed and sorted</h3>
+                                        <p>Filler text to be written later</p>
+                                    </div>
+                                    <div id="5" class="tabcontent">
+                                        <h3 class="list-item-description">Playlists are then automatically generated on your profile</h3>
+                                        <p>Filler text to be written later</p>
+                                    </div>
+                                    <div id="6" class="tabcontent">
+                                        <h3 class="list-item-description">Sit back and enjoy your sorted music library!</h3>
+                                        <p>Filler text to be written later</p>
+                                    </div>
+                                    
+                                    
+                                    <!-- iframe is how you could explain this with code, it would be easier to link pages -->
+                                    <!--<iframe></iframe>-->
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <footer class="footer footer-colors">
+                <nav class="nav-footer">
+                    <span class="logo-span">
+                        <h3><a href="/" class="logo-button footer-link">SpotVac</a></h3>
+                    </span>
+                    <div class="footer-label footer-links">
+                        <h3>
+                            <a class="footer-link" href="/documentation">Documentation</a>
+                        </h3>
+
+
+                        <!-- This should be an ordered list that leads to multiple other pages with more information on their respective topic -->
+                        <ul class="footer-ul">
+                            <li class="footer-li">
+                                <a class="footer-sub-link" href="https://github.com/Sarbsey/Spotvac">
+                                    Github
+                                </a>
+                            </li>
+                            <li class="footer-li">
+                                <a class="footer-sub-link" href="https://spotipy.readthedocs.io/en/2.22.1/">
+                                    Spotipy
+                                </a>
+                            </li>
+                            <li class="footer-li">
+                                <a class="footer-sub-link" href="https://developer.spotify.com/documentation/web-api">
+                                    Spotify API
+                                </a>
+                            </li>
+                            <li class="footer-li">
+                                <a class="footer-sub-link" href="https://www.w3schools.com/css/">
+                                    W3 CSS
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-label footer-links">
+                        <h3>
+                            <a class="footer-link" href="/contact">Contact</a>
+                        </h3>
+
+
+
+                        <!-- This should be an ordered list that leads to multiple other pages with more information on their respective topic -->
+                        <ul class="footer-ul">
+                            <li class="footer-li">
+                                <a class="footer-sub-link" href="">Contact</a>
+                            </li>
+                            <li class="footer-li">
+                                <a class="footer-sub-link" href="">Contact</a>
+                            </li>
+                            <li class="footer-li">
+                                <a class="footer-sub-link" href="">Contact</a>
+                            </li>
+                            <li class="footer-li">
+                                <a class="footer-sub-link" href="">Contact</a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    <div class="footer-label footer-links">
+                        <h3>
+                            <a class="footer-link" href="/other-links">Other Links</a>
+                        </h3>
+
+
+
+                        <!-- This should be an ordered list that leads to multiple other pages with more information on their respective topic -->
+                        <ul class="footer-ul">
+                            <li class="footer-li">
+                                <a class="footer-link footer-sub-link" href="">Other Links</a>
+                            </li>
+                            <li class="footer-li">
+                                <a class="footer-link footer-sub-link" href="">Other Links</a>
+                            </li>
+                            <li class="footer-li">
+                                <a class="footer-link footer-sub-link" href="">Other Links</a>
+                            </li>
+                            <li class="footer-li">
+                                <a class="footer-link footer-sub-link" href="">Other Links</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <br>
+                <p class="legal">
+                    <span>
+                        © 
+                        <!-- -->
+                        2023
+                        <!-- -->
+                        Eric Sarbacker
+                    </span>
+                </p>
+            </footer>
+        </div>  
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script>
+    function performPost() {
+        $.ajax({
+            type: "POST",
+            url: "{{ url_for('launch_spotvac') }}",
+            data: user_url,
+         })
+    }
+</script>
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+<script>
+    function update(){
+        $.get("/counter_update", function(data){
+            $("#count").html(data)
+        });
+    }
+
+    update()
+        var intervalId = setInterval(function() {
+            update()
+    }, 50000)
+
+</script>
+
+
+
+</html>

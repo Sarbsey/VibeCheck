@@ -5,22 +5,13 @@ app = Flask(__name__)
 
 # @ signifies a decorator - a way to wrap a function and modifying its behavior
 
-@app.route('/')
-def home():
-    return 'Hello, World!'
-
-@app.route('/about')
-def about():
-    return 'About'
-
-
-
-
-'''
 @app.route("/", methods=['GET','POST'])
 def index():
   return render_template("index.html")
 
+
+
+'''
 @app.route("/launch_spotvac", methods=['GET','POST'])
 def launch_spotvac():
   if request.method == "POST":

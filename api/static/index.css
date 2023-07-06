@@ -1,0 +1,744 @@
+/* General Stuff  */
+
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body, input, textarea, button {
+    font-family: var(--font-family,CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif)),Helvetica,Arial,sans-serif;
+    margin: auto;
+}
+
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+:root{
+    --main-bg-color: #fff;
+    --main-font-color: #000;
+    --main-selected-bg-color: #000;
+    --main-selected-color: #fff;
+}
+
+::before, ::after {
+    box-sizing: border-box;
+}
+
+.encore-creator-light-theme, .encore-creator-light-theme .encore-base-set {
+    --background-base: #fff;
+    --background-highlight: #f6f6f6;
+    --background-press: #b7b7b7;
+    --background-elevated-base: #fff;
+    --background-elevated-highlight: #f6f6f6;
+    --background-elevated-press: #b7b7b7;
+    --background-tinted-base: rgba(0,0,0,.08);
+    --background-tinted-highlight: rgba(0,0,0,.05);
+    --background-tinted-press: rgba(0,0,0,.12);
+    --background-unsafe-for-small-text-base: #fff;
+    --background-unsafe-for-small-text-highlight: #fff;
+    --background-unsafe-for-small-text-press: #fff;
+    --text-base: #000;
+    --text-subdued: #6a6a6a;
+    --text-bright-accent: #4100f4;
+    --text-negative: #d31225;
+    --text-warning: #9d5a00;
+    --text-positive: #117a37;
+    --text-announcement: #0c67d3;
+    --essential-base: #000;
+    --essential-subdued: #878787;
+    --essential-bright-accent: #4100f4;
+    --essential-negative: #e91429;
+    --essential-warning: #c77200;
+    --essential-positive: #169b45;
+    --essential-announcement: #0d72ea;
+    --decorative-base: #000;
+    --decorative-subdued: #dedede;
+}
+
+.flex-box {
+    -webkit-box-flex: 3;
+    flex-grow: 3;
+}
+
+div{
+    display: block;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.unordered-list-style-1{
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    padding-inline: 0px;
+    margin-block: 0px;
+    overflow-wrap: break-word;
+    list-style-type: none;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.list-item-style-1{
+    position: relative;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.anchor {
+    display: block;
+    position: relative;
+    position: relative;
+    top: -125px;    
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------  */
+/* Master Stuff  */
+
+.master-container {
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin: auto;
+}
+
+.master{
+    display: flex;
+    flex-flow: column;
+    min-height: 100dvh;
+}
+
+nav{
+    display: block;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+button {
+    appearance: auto;
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    margin: 0em;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: var(--button-color);
+    border-image: initial;
+    --button-color: var(--theme-blue);
+}
+
+
+:root{
+    --theme-darker-grey: #181718;
+    --theme-dark-grey: #3c3a3d;
+    --theme-grey: #878289;
+    --theme-light-grey: #e2dbe6;
+    --theme-grey-blue: #8595a5;
+    --theme-deep-blue: #1d2e3e;
+    --theme-dark-blue: #3f6a94;
+    --theme-blue: #8eb7e1;
+    --theme-cream: #eaceca;
+    --theme-dark-pink: #bc7673;
+    --theme-pink: #f98d8a;
+    --theme-bright-pink: #ff5a55;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------  */
+/* Header Stuff  */
+
+/*
+.header-container {
+    background: none;
+    height: 100%;
+    width: 100%;
+} Unused as of 5/30/23 */
+
+.header {
+    display: flex;
+    flex: 0 0 auto;
+    height: 72px;
+    color: #000000;
+    position: sticky;
+    top: 0px;
+    /* z-index: 1030;   idk what this is but spotify uses it */
+    border-bottom: 1px solid var(--theme-grey);
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    align-items: center;
+}
+
+.logo{
+    display: inline-block;
+    font-size: x-large;
+    border-radius: 17px;
+    outline: solid 3px;
+    outline-offset: 6px;
+    /*transition: outline-color 200ms ease-in 0s; */
+}
+
+
+.logo-link:link {
+    text-decoration: none;
+    color: var(--text-base,#000000);
+    position: relative;
+    display: inline-block;
+    transition: .3s;
+    text-decoration: none;
+}
+.logo-link::after {
+    position: absolute;
+    bottom: .3em;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+
+    /*
+    background-color: var(--text-base,#000000);
+    opacity: 0;
+    transition: .3s;
+    */
+}
+.logo-link:hover::after {
+    bottom: 0;
+    opacity: 0;
+}
+
+.logo-link:hover {
+    color: none;   
+}
+.logo-link:visited {
+    color: var(--text-base,#000000);
+}
+
+
+
+
+.header-colors { /*.hRZcJF */
+    color: var(--text-base);
+    position: sticky;
+    top: 0px;
+    z-index: 1030;
+    background-color: var(--background-base);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    height: 72px;
+    --background-base: var(--theme-darker-grey) !important;
+    --background-highlight: var(--theme-blue) !important;
+    --text-base: var(--theme-light-grey) !important;
+/*
+    --background-unsafe-for-small-text-base: #1E073C !important;
+    --background-unsafe-for-small-text-highlight: #130425 !important;
+    --background-unsafe-for-small-text-press: #07020E !important;
+    --text-subdued: #D8A3FF !important;
+    --text-bright-accent: #CBF55C !important;
+    --text-negative: #FFFFFF !important;
+    --text-warning: #FFFFFF !important;
+    --text-positive: #FFFFFF !important;
+    --text-announcement: #FFFFFF !important;
+    --decorative-base: #FFFFFF !important;
+    --decorative-subdued: #5C13B5 !important;
+    --essential-base: #CBF55C !important;
+    --essential-subdued: #738A36 !important;
+    --essential-bright-accent: #FFFFFF !important;
+    --essential-negative: #FFFFFF !important;
+    --essential-warning: #FFFFFF !important;
+    --essential-positive: #FFFFFF !important;
+    --essential-announcement: #FFFFFF !important;
+*/
+}
+
+
+.header-unordered-list{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.log-in-button{
+    -webkit-box-flex: 3;
+    flex-grow: 3;
+    flex-basis: 240px;
+    text-align: right;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------  */
+/* Main Div Stuff  */
+
+.main-content-container{
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.main{
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+}
+
+.page-content-container{
+    flex: 1 1 auto;
+}
+
+.page-content-container{
+    background: none;
+    /* This has no css??? */
+}
+
+.process-launch-container {
+    position: relative;
+    /*background-color: var(--background-elevated-base);   var(--essential-negative), var(--essential-announcement*/
+    min-height: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    max-height: calc(100vh - 72px);
+    --background-base: var(--theme-dark-grey) !important;
+    --background-highlight: var(--theme-blue) !important;
+    --text-base: var(--theme-light-grey) !important;
+}
+
+.process-launch{
+    position: relative;
+    /*background-image: url(/images/home/mobile-banner-confetti.svg);*/
+    background-size: cover;
+    /*background-color: var(--background-elevated-base);*/
+    background-image: linear-gradient(var(--theme-deep-blue), var(--theme-dark-blue));
+    background-position: center center;
+    width: 100%;
+    height: calc(100vh - 64px);
+    max-height: 1058px;
+    display: flex;
+    padding-top: 20%;
+    -webkit-box-pack: center;
+    justify-content: center;
+    --background-base: var(--theme-dark-grey) !important;
+    --background-highlight: var(--theme-blue) !important;
+    --text-base: var(--theme-dark-grey) !important;
+    --text-sub-base: var(--theme-dark-grey);
+}
+
+
+
+.launch-pretext {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 90vw;
+    margin-left: 0; /* From -45vw */
+}
+
+.pretext-color {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: var(--font-family,CircularSpTitle,CircularSpTitle-Tall,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif));
+    padding-block-end: 12px;
+    color: var(--theme-bright-pink);
+}
+
+.h1-launch-pretext{
+    text-align: center;
+    line-height: 40px;
+}
+
+.h2-launch-pretext{
+    font-size: 1.5em;
+    width: 80%;
+    text-align: center;
+    line-height: 32px;
+    font-weight: 100;
+    color: var(--theme-pink);
+}
+
+.launch-button-container{
+    display: grid;
+    grid-template: 80px / auto auto;
+    position: absolute;
+    margin-top: 200px;
+    padding-top: 0px;
+    background: none;
+    --submit-height: 80px;
+    --border-radius: 30px;
+    height: var(--submit-height)
+}
+
+.username-input{
+    height: var(--submit-height);
+    width: 400px;
+    max-width: 1000px;
+    border-radius: var(--border-radius) 0px 0px var(--border-radius);
+    border-width: 0px;
+    padding-left: 20px;   
+    font-size: 24px;
+}
+
+
+
+
+.launch-button{
+    height: var(--submit-height);
+    width: 100px;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    font-size: 1.725rem;
+    font-weight: 700;
+    font-family: var(--font-family,CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif));
+    background-color: var(--theme-blue);
+    color: var(--theme-blue);
+    border: 0px;
+    border-radius: 0px var(--border-radius) var(--border-radius) 0px;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    touch-action: manipulation;
+    transition-duration: 33ms;
+    transition-property: background-color, border-color, color, box-shadow, filter, transform;
+    user-select: none;
+    vertical-align: middle;
+    transform: translate3d(0px, 0px, 0px);
+    padding: 0px;
+    min-inline-size: 0px;
+    align-self: center;
+    padding-right: 20px;
+}
+
+
+
+/*
+.button-color{
+    font-size: 1.4rem;
+    padding: 16px 40px;
+    --background-base: #00FFFF !important;
+    --background-highlight: #1AFFFF !important;
+    --background-press: #33FFFF !important;
+    --background-elevated-base: #00FFFF !important;
+    --background-elevated-highlight: #1AFFFF !important;
+    --background-elevated-press: #33FFFF !important;
+    --background-tinted-base: #00FFFF !important;
+    --background-tinted-highlight: #1AFFFF !important;
+    --background-tinted-press: #33FFFF !important;
+    --background-unsafe-for-small-text-base: #00FFFF !important;
+    --background-unsafe-for-small-text-highlight: #1AFFFF !important;
+    --background-unsafe-for-small-text-press: #33FFFF !important;
+    --text-base: #400073 !important;
+    --text-subdued: #400073 !important;
+    --text-bright-accent: #400073 !important;
+    --text-negative: #400073 !important;
+    --text-warning: #400073 !important;
+    --text-positive: #400073 !important;
+    --text-announcement: #400073 !important;
+    --essential-base: #400073 !important;
+    --essential-subdued: #400073 !important;
+    --essential-bright-accent: #400073 !important;
+    --essential-negative: #400073 !important;
+    --essential-warning: #400073 !important;
+    --essential-positive: #400073 !important;
+    --essential-announcement: #400073 !important;
+    --decorative-base: #400073 !important;
+    --decorative-subdued: #400073 !important;
+
+}
+*/
+
+
+.launch-button-text{
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    background-color: transparent;
+    color: var(--theme-bright-pink);
+    display: flex;
+    border-radius: 500px;
+    font-size: inherit;
+    min-block-size: 56px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-block: 12px;
+    padding-inline: 48px;
+
+}
+
+.about{
+    padding-left: 10px;
+
+}
+
+
+
+/* Style the tab */
+.tab {
+    width: 100%;
+    overflow: hidden;
+    font-family: var(--font-family);
+    color: var(--theme-darker-grey);
+    background-color: var(--theme-cream);
+  }
+
+  .tab-container{
+    --tab-height: 80px;
+    width: 100%;
+    height: var(--tab-height);
+    background: var(--theme-pink);
+  }
+
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    width: calc(100%/6);
+    min-width: 100px;
+    height: var(--tab-height);
+    background-color: var(--theme-pink);
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-family: var(--font-family);
+    font-size: large;
+   
+  }
+
+
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: var(--theme-bright-pink);
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: var(--theme-bright-pink);
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    animation: fadeEffect 1s;
+    color: var(--theme-light-grey);
+    background-color: var(--theme-dark-grey);
+  }
+
+  @keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+/* ------------------------------------------------------------------------------------------------------------------------  */
+/* Footer Stuff  */
+
+
+.footer {
+    background-color: var(--background-base,#ffffff);
+    color: var(--text-subdued,#6a6a6a);
+    padding: 56px 6vw;
+    justify-self: end;
+}
+
+
+.footer-colors {
+    --background-base: #000;
+    --background-highlight: #0d0d0d;
+    --background-press: #3f3f3f;
+    --background-elevated-base: #000;
+    --background-elevated-highlight: #000;
+    --background-elevated-press: #000;
+    --background-tinted-base: #000;
+    --background-tinted-highlight: #000;
+    --background-tinted-press: #000;
+    --background-unsafe-for-small-text-base: #000;
+    --background-unsafe-for-small-text-highlight: #000;
+    --background-unsafe-for-small-text-press: #000;
+    --text-base: #fff;
+    --text-subdued: #8f8f8f;
+    --text-bright-accent: #8559ff;
+    --text-negative: #fff;
+    --text-warning: #fff;
+    --text-positive: #fff;
+    --text-announcement: #fff;
+    --essential-base: #fff;
+    --essential-subdued: #5e5e5e;
+    --essential-bright-accent: #6127ff;
+    --essential-negative: #fff;
+    --essential-warning: #fff;
+    --essential-positive: #fff;
+    --essential-announcement: #fff;
+    --decorative-base: #fff;
+    --decorative-subdued: #1f1f1f;
+}
+
+.nav-footer {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    gap: 24px 12px;
+    max-width: 1200px;
+}
+
+.footer-links {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin-block: 0px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    font-family: var(--font-family,CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif));
+}
+
+
+.footer-ul {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    padding-inline: 0px;
+    margin-block: 0px;
+    overflow-wrap: break-word;
+    list-style-type: none;
+}
+
+.footer-li{
+    display: list-item;
+    padding-block-end: 1em;
+}
+
+
+
+.logo-span {
+    grid-column: span 2 / auto;
+}
+
+.link, .link[href] {
+    text-decoration: none;
+}
+
+
+.footer-link:link {
+    text-decoration: none;
+    color: var(--text-base,#000000);
+    position: relative;
+    display: inline-block;
+    transition: .3s;
+    text-decoration: none;
+}
+.footer-link::after {
+    position: absolute;
+    bottom: .3em;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-base,#000000);
+    opacity: 0;
+    transition: .3s;
+}
+.footer-link:hover::after {
+    bottom: 0;
+    opacity: 1;
+}
+.footer-link:hover {
+    color: var(--text-base,#000000);   
+}
+.footer-link:visited {
+    color: var(--text-base,#000000);
+}
+
+
+
+
+
+.footer-sub-link:link{
+    text-decoration: none;
+    color: var(--essential-subdued);
+    position: relative;
+    display: inline-block;
+    transition: .3s;
+    text-decoration: none;
+}
+
+.footer-sub-link::after {
+    position: absolute;
+    bottom: .3em;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: var(--essential-subdued);
+    opacity: 0;
+    transition: .3s;
+}
+
+.footer-sub-link:hover::after{
+    bottom: 0;
+    opacity: 1;
+
+}
+
+
+.footer-sub-link:hover {
+    color: white;   
+}
+.footer-sub-link:visited {
+    color: var(--essential-subdued);
+}
+
+.legal{
+    text-align: right;
+}
