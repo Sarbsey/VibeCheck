@@ -3,7 +3,6 @@ import os
 import time
 import sys
 import pandas as pd
-from flask_restful import Resource, Api, reqparse
 from IPython.display import clear_output
 from spotipy import SpotifyClientCredentials, util, SpotifyOAuth, SpotifyException
 from dotenv import load_dotenv
