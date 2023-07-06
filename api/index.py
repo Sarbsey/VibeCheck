@@ -6,7 +6,18 @@ app = Flask(__name__)
 
 # @ signifies a decorator - a way to wrap a function and modifying its behavior
 
+@app.route('/')
+def home():
+    return 'Hello, World!'
 
+@app.route('/about')
+def about():
+    return 'About'
+
+
+
+
+'''
 @app.route("/", methods=['GET','POST'])
 def index():
   return render_template("index.html")
@@ -48,7 +59,7 @@ def profile(name):
   return render_template('profile.html', name=name)
 
 
-'''
+
 if __name__ == '__main__':
     app.run(port="5000", debug=True)
 

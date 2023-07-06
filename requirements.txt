@@ -11,6 +11,7 @@ decorator==5.1.1
 Deprecated==1.2.13
 executing==0.8.3
 flatbuffers==1.12
+Flask==2.2.2
 gast==0.4.0
 google-auth==2.9.0
 google-auth-oauthlib==0.4.6
