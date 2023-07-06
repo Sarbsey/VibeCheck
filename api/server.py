@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template
+import button
+
 
 app = Flask(__name__)
 
@@ -15,17 +17,18 @@ def index():
 @app.route("/launch_spotvac", methods=['GET','POST'])
 def launch_spotvac():
   if request.method == "POST":
-    # user_url = request.form['url-input']
-    # button.test(user_url)
+    user_url = request.form['url-input']
+    button.test(user_url)
     return ('', 200)
 
-'''
+
 @app.route("/counter_update")
 def counter_update():
   num_list = button.counter_update()
   return str(num_list)
 
 
+'''
 #finish later
 @app.route("/test")
 def test():
