@@ -12,9 +12,9 @@ client = FaunaClient(
   endpoint="https://db.fauna.com/",
 )
 
-user_id = "ggggg"
-FirstName = "vvvvvvv"
-LastName = "ffff"
+user_id = "1234"
+FirstName = "4321"
+LastName = "098"
 doc_uid = client.query(q.new_id())
 
 submit = {"data":{
@@ -25,17 +25,13 @@ submit = {"data":{
     }
 }
 }
-length = client.query(
-    q.count(
-        q.paginate(
-                q.documents(
-                    q.collection('spotvac_users')
-                )
-            )
+client.query(
+    q.create(
+        q.ref(
+            q.collection('spotvac_users'), doc_uid), submit
         )
 )
 
-print(length['data'][0])
 
 #indexes = client.query(q.get(q.ref(q.collection("spotvac_users"), "1")))
 

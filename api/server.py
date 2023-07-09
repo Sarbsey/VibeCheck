@@ -1,6 +1,5 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 from util import button
-
 
 app = Flask(__name__)
 
@@ -19,7 +18,7 @@ def launch_spotvac():
   if request.method == "POST":
     user_url = request.form['url-input']
     button.test(user_url)
-    return ('', 200)
+    return redirect("http://127.0.0.1:5000/", code=302)
 
 
 @app.route("/counter_update")
@@ -27,8 +26,10 @@ def counter_update():
   num_list = button.counter_update()
   return str(num_list)
 
-
 '''
+if __name__ == '__main__':
+    app.run(port="5000", debug=True)
+
 #finish later
 @app.route("/test")
 def test():
