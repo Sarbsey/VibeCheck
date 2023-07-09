@@ -16,11 +16,31 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 
+from faunadb import query as q
+from faunadb.objects import Ref
+from faunadb.client import FaunaClient
 
 
 
 
-def test(user_url):              
+def test(user_url):
+    
+    sp = spotipy_generate_token(user_url)
+    user_info = sp.me()
+    data_submit = format_data(user_info)
+    fauna_submit(data_submit)
+    
+    db_length = fauna_length()
+
+    return db_length
+
+def counter_update():
+    db_length = fauna_length()
+
+    return db_length
+
+def spotipy_generate_token(user_url):
+    load_dotenv()
     client_id = os.environ['client_ID']
     client_secret = os.environ['client_secret']
     redirect_uri = os.environ['redirect_url']
@@ -31,19 +51,53 @@ def test(user_url):
 
     token = util.prompt_for_user_token(username,scope,client_id,client_secret,redirect_uri) 
     sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
-    user_info = sp.me()
-    user_record = user_info['id']
-    fp = open(r"./spotvac_users.txt", 'a+')
-    fp.write('\n'+user_record)
-    fr = open(r"./spotvac_users.txt", 'r')
-    num_lines = len(fr.readlines())
-    
+    return sp
 
-    return num_lines
+def fauna_submit(data_submit):
+    fc = FaunaClient(
+    secret=os.environ['fauna_secret'],
+    endpoint="https://db.fauna.com/"
+    )
+    doc_uid = fc.query(q.new_id())
 
-def counter_update():
-    fr = open(r"./spotvac_users.txt", 'r')
-    num_lines = len(fr.readlines())
-    num_lines = '{:,}'.format(num_lines)
-    return num_lines
 
+    fc.query(
+    q.create(
+    q.ref(
+    q.collection('spotvac_users'), doc_uid), data_submit
+    ))
+    return
+
+
+def fauna_length():
+    fc = FaunaClient(
+    secret=os.environ['fauna_secret'],
+    endpoint="https://db.fauna.com/"
+    )
+
+    length = fc.query(
+    q.count(
+    q.paginate(
+    q.documents(
+    q.collection('spotvac_users')))))
+
+    db_length = length['data'][0]
+    return db_length
+
+
+def format_data(user_info):
+    print(user_info)
+    user_id = "ggggg"
+    FirstName = "vvvvvvv"
+    LastName = "ffff"
+
+    submit = {"data":{
+    "user_id" : user_id,
+    "user_data":{
+        "FirstName":FirstName,
+        "LastName":LastName
+            }
+        }
+    }
+
+    return submit
