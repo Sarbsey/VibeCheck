@@ -3,7 +3,7 @@ import os
 import time
 import sys
 import pandas as pd
-from IPython.display import clear_output
+
 from spotipy import SpotifyClientCredentials, util, SpotifyOAuth, SpotifyException
 from dotenv import load_dotenv
 
