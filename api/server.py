@@ -24,7 +24,6 @@ Session(app)
 @app.route("/", methods=['GET','POST'])
 def index():
   load_dotenv()
-  api_base = os.environ['api_base']
   client_id = os.environ['client_ID']
   client_secret = os.environ['client_secret']
   redirect_uri = os.environ['redirect_url']
