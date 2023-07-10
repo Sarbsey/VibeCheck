@@ -1,38 +1,31 @@
-from faunadb import query as q
-from faunadb.objects import Ref
-from faunadb.client import FaunaClient
+import spotipy
 import os
+from spotipy import SpotifyClientCredentials, util, SpotifyOAuth, SpotifyException
 from dotenv import load_dotenv
-
 load_dotenv()
 
-client = FaunaClient(
-  secret=os.environ['fauna_secret'],
-  # NOTE: Use the correct endpoint for your database's Region Group.
-  endpoint="https://db.fauna.com/",
-)
+client_id = os.environ['client_ID']
+client_secret = os.environ['client_secret']
+redirect_uri = os.environ['redirect_url']
+user_url = 'https://open.spotify.com/user/22mdb5fhocl2fobpsjbxvvkra'
+scope = 'playlist-modify-public'
 
-user_id = "1234"
-FirstName = "4321"
-LastName = "098"
-doc_uid = client.query(q.new_id())
+def spotipy_generate_token(user_url):
+    load_dotenv()
+    client_id = os.environ['client_ID']
+    client_secret = os.environ['client_secret']
+    redirect_uri = os.environ['redirect_url']
+    username = user_url
+    scope = 'playlist-modify-public'
 
-submit = {"data":{
-    "user_id" : user_id,
-    "user_data":{
-        "FirstName":FirstName,
-        "LastName":LastName
-    }
-}
-}
-client.query(
-    q.create(
-        q.ref(
-            q.collection('spotvac_users'), doc_uid), submit
-        )
-)
+    manager = SpotifyClientCredentials(client_id,client_secret)
+
+    token = util.prompt_for_user_token(username,scope,client_id,client_secret,redirect_uri) 
+    sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
+    return sp
 
 
-#indexes = client.query(q.get(q.ref(q.collection("spotvac_users"), "1")))
+sp = spotipy_generate_token(user_url)
+user_info = sp.me()
 
-#print(indexes)
+print(user_info)

@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect
+import testbutton as button
 from util import button
 
 app = Flask(__name__)
@@ -18,7 +19,9 @@ def launch_spotvac():
   if request.method == "POST":
     user_url = request.form['url-input']
     button.test(user_url)
-    return redirect("https://test-spotvac.vercel.app/", code=302)
+    return redirect("/", code=302)
+  if request.method == "GET":
+    return "WTF"
 
 
 @app.route("/counter_update")
