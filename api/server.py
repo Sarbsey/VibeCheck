@@ -18,7 +18,7 @@ def launch_spotvac():
   if request.method == "POST":
     user_url = request.form['url-input']
     button.test(user_url)
-    return redirect("http://127.0.0.1:5000/", code=302)
+    return redirect("https://test-spotvac.vercel.app/", code=302)
 
 
 @app.route("/counter_update")
