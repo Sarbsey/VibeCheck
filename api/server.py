@@ -10,7 +10,7 @@ import string
 import requests
 from urllib.parse import urlencode
 import base64
-from util import button, spotvac, Spotvac_funcations, fuanadatafunctions
+from util import button, spotvac, Spotvac_functions, faunadatafunctions
 
 
 
