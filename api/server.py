@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template, redirect, session
 from flask_session import Session
-
 import spotipy
 import spotipy.util as util
 import os
@@ -10,7 +9,7 @@ import string
 import requests
 from urllib.parse import urlencode
 import base64
-from util import button, spotvac, Spotvac_functions
+from util import button
 from util import faunadatafunctions as fdb
 
 
@@ -31,8 +30,10 @@ def launch_spotvac():
   if request.method == "POST":
     user_url = request.form['url-input']
     if user_url:
-      #button.verify(user_url)
-      #button.run_spotvac(user_url)
+      '''
+      button.verify(user_url)
+      button.run_spotvac(user_url)
+      '''
       state = ''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase) for i in range(16))
 
       authorize_url = os.environ['authorize_url']

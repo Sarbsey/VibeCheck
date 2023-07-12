@@ -15,7 +15,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 
-
+'''
 def run_spotvac(user_url):
     
     sp = spotipy_generate_token(user_url)
@@ -33,7 +33,7 @@ def verify(user_url):
 
     user_verification_data = fdb.look_up(user_id)
     return
-
+'''
 
 def test(token_data):
     authorize_url = os.environ['authorize_url']
@@ -49,8 +49,7 @@ def test(token_data):
     return
 
 
-
-
+'''
 def spotipy_generate_token(user_url):
     load_dotenv()
     api_base = os.environ['api_base']
@@ -63,6 +62,6 @@ def spotipy_generate_token(user_url):
     #sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
     return 
 
-
+'''
 
 
