@@ -35,28 +35,18 @@ spt = spotipy.Spotify(auth=token)
 
 
 
-def spotipy_generate_token(user_url):
-    load_dotenv()
-    api_base = os.environ['api_base']
+def generate_token(token_data):
+    authorize_url = os.environ['authorize_url']
     client_id = os.environ['client_ID']
     client_secret = os.environ['client_secret']
     redirect_uri = os.environ['redirect_url']
-    username = user_url
     scope = 'playlist-modify-public'
-    manager='penis'
 
-    # Step 1: Send Authorization request to accounts.sotify.com/authorize
+    manager = SpotifyClientCredentials(client_id,client_secret)
+    sp = spotipy.Spotify(client_credentials_manager=manager, auth=token_data['access_token'])
 
-
-
-    # Step 2: User logs in and we recieve an authorization code
-    # Step 3: Use authorization code to get token
-    # Step 4: Pass token into spotipy
-
-
-
-    sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
-    return sp
+    user_info = sp.me()
+    return user_info
 
 
 

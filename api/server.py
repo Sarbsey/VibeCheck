@@ -11,6 +11,7 @@ from urllib.parse import urlencode
 import base64
 from util import button
 from util import faunadatafunctions as fdb
+from util import Spotvac_functions as sf
 
 
 app = Flask(__name__)
@@ -86,7 +87,9 @@ def callback():
 
   full_access_token = requests.post(url=token_url, data=data, headers=headers)
   token_data = full_access_token.json()
-  button.test(token_data)
+  user_info = sf.generate_token(token_data)
+  submit = fdb.format_data(user_info, token_data)
+  fdb.submit(submit)
   return redirect("/", code=302)
 
 

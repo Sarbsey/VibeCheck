@@ -3,7 +3,7 @@ from faunadb.objects import Ref
 from faunadb.client import FaunaClient
 import os
 
-def format_data(user_info):
+def format_data(user_info, token_data):
     name = user_info['display_name']
     name = name.split()
     user_id = user_info['id']
@@ -16,7 +16,8 @@ def format_data(user_info):
     "user_data":{
         "FirstName":FirstName,
         "LastName":LastName
-            }
+            },
+    "token_data": token_data
         }
     }
 
