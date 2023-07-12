@@ -5,105 +5,88 @@ import spotipy
 import spotipy.util as util
 import os
 from dotenv import load_dotenv
-from util import button
+import secrets
+import string
+import requests
+from urllib.parse import urlencode
+import base64
+from util import button, spotvac, Spotvac_funcations, fuanadatafunctions
 
 
 
 app = Flask(__name__)
 
 
-app.config['SECRET_KEY'] = os.urandom(64)
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_FILE_DIR'] = './.flask_session/'
-
-Session(app)
-
-
-# @ signifies a decorator - a way to wrap a function and modifying its behavior
 
 @app.route("/", methods=['GET','POST'])
 def index():
-  load_dotenv()
-  client_id = os.environ['client_ID']
-  client_secret = os.environ['client_secret']
-  redirect_uri = os.environ['redirect_url']
-  cache_handler = spotipy.cache_handler.FlaskSessionCacheHandler(session)
-  auth_manager = spotipy.oauth2.SpotifyOAuth(scope='user-read-currently-playing playlist-modify-private',
-                                               cache_handler=cache_handler,
-                                               redirect_uri=redirect_uri,
-                                               client_id=client_id,
-                                               client_secret=client_secret,
-                                               show_dialog=True)
-  if request.args.get("code"):
-    # Step 2. Being redirected from Spotify auth page
-    auth_manager.get_access_token(request.args.get("code"))
-    return redirect('/')
+  return render_template("index.html")
 
-  if not auth_manager.validate_token(cache_handler.get_cached_token()):
-      # Step 1. Display sign in link when no token
-      auth_url = auth_manager.get_authorize_url()
-      return f'<h2><a href="{auth_url}">Sign in</a></h2>'
-
-  # Step 3. Signed in, display data
-  spotify = spotipy.Spotify(auth_manager=auth_manager)
-  return f'<h2>Hi {spotify.me()["display_name"]}, ' \
-          f'<small><a href="/sign_out">[sign out]<a/></small></h2>' \
-          f'<a href="/playlists">my playlists</a> | ' \
-          f'<a href="/currently_playing">currently playing</a> | ' \
-      f'<a href="/current_user">me</a>' \
-  #return render_template("index.html")
-
-@app.route('/sign_out')
-def sign_out():
-    session.pop("token_info", None)
-    return redirect('/')
-
-
-@app.route('/playlists')
-def playlists():
-    cache_handler = spotipy.cache_handler.FlaskSessionCacheHandler(session)
-    auth_manager = spotipy.oauth2.SpotifyOAuth(cache_handler=cache_handler)
-    if not auth_manager.validate_token(cache_handler.get_cached_token()):
-        return redirect('/')
-
-    spotify = spotipy.Spotify(auth_manager=auth_manager)
-    return spotify.current_user_playlists()
-
-
-@app.route('/currently_playing')
-def currently_playing():
-    cache_handler = spotipy.cache_handler.FlaskSessionCacheHandler(session)
-    auth_manager = spotipy.oauth2.SpotifyOAuth(cache_handler=cache_handler)
-    if not auth_manager.validate_token(cache_handler.get_cached_token()):
-        return redirect('/')
-    spotify = spotipy.Spotify(auth_manager=auth_manager)
-    track = spotify.current_user_playing_track()
-    if not track is None:
-        return track
-    return "No track currently playing."
-
-
-@app.route('/current_user')
-def current_user():
-    cache_handler = spotipy.cache_handler.FlaskSessionCacheHandler(session)
-    auth_manager = spotipy.oauth2.SpotifyOAuth(cache_handler=cache_handler)
-    if not auth_manager.validate_token(cache_handler.get_cached_token()):
-        return redirect('/')
-    spotify = spotipy.Spotify(auth_manager=auth_manager)
-    return spotify.current_user()
-
+stateKey = 'spotify_auth_state'
 
 @app.route("/launch_spotvac", methods=['GET','POST'])
 def launch_spotvac():
+  
+
   if request.method == "POST":
     user_url = request.form['url-input']
-    button.test(user_url)
+    if user_url:
+      #button.verify(user_url)
+      #button.run_spotvac(user_url)
+      state = ''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase) for i in range(16))
+
+      authorize_url = os.environ['authorize_url']
+      client_id = os.environ['client_ID']
+      client_secret = os.environ['client_secret']
+      redirect_uri = os.environ['redirect_url']
+      scope = 'playlist-modify-public'
+
+      auth_dict = {
+          'client_id': client_id,
+          'response_type': 'code',
+          'redirect_uri': redirect_uri,
+          'scope': scope,
+          'state': state
+      }
+
+      params = urlencode(auth_dict)
+      full_auth_url = f"{authorize_url}" + params
+
+    else:
+      print('bruh')
+    return redirect(full_auth_url, code=302)
+  else:
     return redirect("/", code=302)
-  if request.method == "GET":
-    return redirect("/", code=302)
 
 
+@app.route("/callback", methods=['GET','POST'])
+def callback():
+  token_url = os.environ['token_url']
+  client_id = os.environ['client_ID']
+  client_secret = os.environ['client_secret']
+  redirect_uri = os.environ['redirect_url']
+  scope = 'playlist-modify-public'
+  code = request.args.get('code')
+  
 
+  auth_header = base64.urlsafe_b64encode((client_id + ':' + client_secret).encode())
+  headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Authorization': 'Basic %s' % auth_header.decode('ascii')
+  }
+
+  data = {
+    'grant_type': 'authorization_code',
+    'code': code,
+    'redirect_uri': redirect_uri
+  }
+  
+
+
+  full_access_token = requests.post(url=token_url, data=data, headers=headers)
+  token_data = full_access_token.json()
+  button.test(token_data)
+  return redirect("/", code=302)
 
 
 
@@ -115,10 +98,10 @@ def counter_update():
 
 
 
-
 '''
+
 if __name__ == '__main__':
-    app.run(port="8000", debug=True)
+    app.run(port="5000", debug=True)
 
 #finish later
 @app.route("/test")
@@ -140,38 +123,5 @@ def other_links():
 
 @app.route('/profile/<name>')
 def profile(name):
-  return render_template('profile.html', name=name)
 
-
-
-if __name__ == '__main__':
-    app.run(port="5000", debug=True)
-
-
-@app.route('/')
-def index():
-  return "Method used: %s" % request.method
-
-@app.route('/bacon', methods=['GET','POST'])
-def bacon():
-  if request.method == 'POST':
-    return "You are using POST"
-  else:
-    return "I hate you"
-
-@app.route('/tuna')
-def tuna():
-  return '<h2>Tuna is good</h2>'
-  
-@app.route('/profile/<username>')
-def profile(username):
-  return 'Ball Fart on %s' % username
-
-@app.route('/post/<int:post_id>')
-def post(post_id):
-  return 'Ball Fart on %s' % post_id
-
-@app.route('/')
-def index():
-  return render_template('index.html')
 '''
