@@ -70,8 +70,8 @@ def spotipy_generate_token(user_url):
     username = user_url
     scope = 'playlist-modify-public'
     manager='penis'
-    sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
-    return sp
+    #sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
+    return 
 
 
 
