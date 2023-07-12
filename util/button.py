@@ -13,8 +13,7 @@ import logging
 
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from util import faunadatafunctions as fdb
-
+import faunadatafunctions as fdb
 
 
 
