@@ -10,8 +10,7 @@ import string
 import requests
 from urllib.parse import urlencode
 import base64
-from util import button, spotvac, Spotvac_functions, faunadatafunctions
-
+from util import button, spotvac, Spotvac_functions
 
 
 app = Flask(__name__)
