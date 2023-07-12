@@ -13,7 +13,6 @@ import logging
 
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-import faunadatafunctions as fdb
 
 
 
@@ -49,14 +48,6 @@ def test(token_data):
     print(sp.me())
     return
 
-
-
-
-
-def counter_update():
-    db_length = fdb.length()
-
-    return db_length
 
 
 

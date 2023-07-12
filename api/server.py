@@ -10,7 +10,8 @@ import string
 import requests
 from urllib.parse import urlencode
 import base64
-from util import button
+from util import button, spotvac, Spotvac_functions
+from util import faunadatafunctions as fdb
 
 
 app = Flask(__name__)
@@ -91,7 +92,7 @@ def callback():
 
 @app.route("/counter_update")
 def counter_update():
-  num_list = button.counter_update()
+  num_list = fdb.length()
   return str(num_list)
 
 
