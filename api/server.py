@@ -99,7 +99,7 @@ def counter_update():
   num_list = fdb.length()
   return str(num_list)
 
-
+'''
 @app.route("/documentation")
 def documentation():
   return render_template('construction.html')
@@ -117,7 +117,7 @@ def other_links():
   return render_template('construction.html')
 
 
-'''
+
 if __name__ == '__main__':
     app.run(port="5000", debug=True)
 
