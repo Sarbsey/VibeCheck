@@ -4,10 +4,11 @@
 * {
     box-sizing: border-box;
     scroll-behavior: smooth;
+    font-family:'Ubuntu', sans-serif;
 }
 
 body, input, textarea, button {
-    font-family: var(--font-family,CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif)),Helvetica,Arial,sans-serif;
+    font-family:'Ubuntu', sans-serif;
     margin: auto;
 }
 
@@ -15,6 +16,11 @@ a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
     text-decoration: underline;
+}
+
+p{
+    line-height: 1.4;
+    font-size: 20px;
 }
 
 :root{
@@ -58,6 +64,17 @@ a:-webkit-any-link {
     --decorative-base: #000;
     --decorative-subdued: #dedede;
 }
+
+#firstHeader{
+    width: 100%;
+    z-index:500;
+}
+#secondHeader{
+    width: 100%;
+    z-index:500;
+}
+
+
 
 .flex-box {
     -webkit-box-flex: 3;
@@ -214,6 +231,7 @@ button {
     border-radius: 17px;
     outline: solid 3px;
     outline-offset: 6px;
+    padding: 3px 9px 3px 9px;
     /*transition: outline-color 200ms ease-in 0s; */
 }
 
@@ -296,6 +314,9 @@ button {
 */
 }
 
+.nav-header{
+    margin: 10px;
+}
 
 .header-unordered-list{
     display: flex;
@@ -415,7 +436,11 @@ button {
     background: none;
     --submit-height: 80px;
     --border-radius: 30px;
-    height: var(--submit-height)
+    height: var(--submit-height);
+    border: 0;
+    border-style: none;
+    border-radius: var(--border-radius);
+    background-color: var(--theme-blue); 
 }
 
 .username-input{
@@ -426,6 +451,7 @@ button {
     border-width: 0px;
     padding-left: 20px;   
     font-size: 24px;
+    vertical-align: middle;
 }
 
 
@@ -458,7 +484,7 @@ button {
     padding: 0px;
     min-inline-size: 0px;
     align-self: center;
-    padding-right: 20px;
+    padding-right: 10px;
 }
 
 
@@ -515,15 +541,46 @@ button {
     -webkit-box-pack: center;
     justify-content: center;
     padding-block: 12px;
-    padding-inline: 48px;
+}
 
+.list-item-description{
+    font-size: 30px;
+}
+
+.about-header{
+    padding-left: 50px;
+    justify-self: left;
+}
+
+.about-header2{
+    padding-left: 50px;
+    justify-self: left;
+    background-color: var(--theme-pink);
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*border-bottom: 2px solid var(--theme-bright-pink);*/
 }
 
 .about{
     padding-left: 10px;
-
+    max-width: 85%;
+    min-width: 500px;
+    text-indent: 2em;
+    margin: auto;
 }
 
+.about2{
+    padding-left: 10px;
+    max-width: 98%;
+    min-width: 500px;
+    text-indent: 2em;
+    margin: auto;
+}
+
+.processs-description-content{
+    background-color: var(--theme-cream);
+}
 
 
 /* Style the tab */
@@ -533,10 +590,17 @@ button {
     font-family: var(--font-family);
     color: var(--theme-darker-grey);
     background-color: var(--theme-cream);
+    margin: auto;
   }
 
   .tab-container{
+    display: grid;
+    grid-template-columns: repeat(6, var(--tab-width));
+    grid-template-rows: 1, var(--tab-height);
+    justify-items: center;
+    align-items: center;
     --tab-height: 80px;
+    --tab-width: calc(100% / 6);
     width: 100%;
     height: var(--tab-height);
     background: var(--theme-pink);
@@ -544,40 +608,79 @@ button {
 
   /* Style the buttons that are used to open the tab content */
   .tab button {
-    width: calc(100%/6);
-    min-width: 100px;
+    width: 90%;
     height: var(--tab-height);
     background-color: var(--theme-pink);
     float: left;
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
     transition: 0.3s;
     font-family: var(--font-family);
     font-size: large;
-   
+    justify-items: center;
   }
 
 
   /* Change background color of buttons on hover */
   .tab button:hover {
     background-color: var(--theme-bright-pink);
+    height: 90%;
+    height: 80%;
+    border-radius: 25px;
   }
   
   /* Create an active/current tablink class */
   .tab button.active {
     background-color: var(--theme-bright-pink);
+    border-radius: 25px;
+    height: 90%;
+    height: 80%;
+    justify-content: center;
   }
   
   /* Style the tab content */
   .tabcontent {
-    display: none;
+    display: absolute;
+    height: auto;
+    margin-top: 0px;
     padding: 6px 12px;
     border-top: none;
     animation: fadeEffect 1s;
     color: var(--theme-light-grey);
     background-color: var(--theme-dark-grey);
+  }
+
+.img-container{
+    display: grid;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 12px;
+    grid-template: var(--img-height) 50px / repeat(2, calc(50% - 6px));
+    --img-height: calc(0.8 * var(--img-width));
+    --img-width: 100%;
+}
+
+  .grid-img{
+    height: 100%;
+    width: 100%;
+  }
+
+  .grid-img-description{
+    padding-left: 15px;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  .tab-img{
+    display: block;
+    margin: auto;
+    width: 50%;
+    --width: 50vw;
+    height: calc( 411px / 580px * var(--width));
+    --height: calc( 411px / 580px * var(--width));
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   @keyframes fadeEffect {
@@ -633,6 +736,7 @@ button {
     grid-template-columns: repeat(5, auto);
     gap: 24px 12px;
     max-width: 1200px;
+
 }
 
 .footer-links {
@@ -640,8 +744,7 @@ button {
     -webkit-tap-highlight-color: transparent;
     margin-block: 0px;
     font-size: 0.875rem;
-    font-weight: 400;
-    font-family: var(--font-family,CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif));
+    font-weight: 400;;
 }
 
 
@@ -741,4 +844,5 @@ button {
 
 .legal{
     text-align: right;
+    font-size: 14px;
 }

@@ -3,8 +3,11 @@
 <head>
     <title>SpotVac | Playlist Manager</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Ubuntu&display=swap" rel="stylesheet">
     <script src="{{ url_for('static', filename='index_code.js') }}"></script>
-
+    <!--<meta name="referrer" content="no-referrer" /> -->
 </head>
 
 <!-- If developing further, consider using bootstrap as a html,css,js library 
@@ -51,24 +54,12 @@ also consider React for interactivity -->
                                     <h2 class="h2-launch-pretext pretext-color"><label  id="count"></label><!-- counter --> Libraries sorted so far</h2>
                                 </div>
                                 <div class="launch-button-container">
-
-
-
                                     <form action="{{ url_for('launch_spotvac') }}" method="POST">
                                         <input name="url-input" type="text" class="username-input" placeholder="open.spotify.com/user/&#60user-id&#62">
                                         <button class="launch-button" type="submit" onclick="performPost(), update()">
                                             <span class="launch-button-text button-color">Sort!</span>
                                         </button>
                                     </form>
-
-                                
-
-                                    
-                                    
-
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -77,41 +68,119 @@ also consider React for interactivity -->
                                 <div class="processs-description-content">
                                     <div class="tab">
                                         <a class="anchor" id="about-section"></a>
-                                        <h1 class="about">What does SpotVac do?</h1>
-                                        <p class="about">Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.Filler text to be written later.</p>
+                                        <h1 class="about-header">What does SpotVac do?</h1>
+                                        <p class="about">
+                                            SpotVac was developed because many people on spotify have "liked music" playlists that number in the thousands, but no time or will to sort every song into its respective playlist.
+                                            Spotvac collects all of your liked music, plus any music from public playlists that you follow, and sorts them based on data from Spotify's API.
+                                            Spotvac is designed to be as simple as possible to use, with just one click your playlists will be sorted based on Thayer's human emotional classification model.
+                                        </p><br>
+                                        <h1 class="about-header">What information does SpotVac use?</h1>
+                                        <p class="about">
+                                            In a world in internet privacy and data breaches, Spotvac was developed with the explicit intention of not collecting user information.
+                                            Unfortunately, in order to cooperate with the Spotify API, SpotVac collects a few minor pieces of information.
+                                            The information collected is the Spotify username and unique user id, which are publicly available. 
+                                        </p><br>
+                                        <div class="about-header2">
+                                            <h1>How does SpotVac work?</h1>
+                                            <p>Explore the options below to understand what SpotVac is doing behind the scenes.</p>
+                                        </div>
                                         <div class="tab-container">
-                                            <button class="tablinks" onclick="openDialogue(event, '1')" id="defaultOpen">Button</button>
+                                            <button class="tablinks" onclick="openDialogue(event, '1')" id="defaultOpen">Playlist Selection</button>
                                             <!--<img src="https://www.freeiconspng.com/thumbs/greater-than-sign-icon/greater-than-sign-icon-30.png">-->
-                                            <button class="tablinks" onclick="openDialogue(event, '2')">Playlists</button>
+                                            <button class="tablinks" onclick="openDialogue(event, '2')">API Authorization</button>
                                             <button class="tablinks" onclick="openDialogue(event, '3')">Spotify Data</button>
-                                            <button class="tablinks" onclick="openDialogue(event, '4')">Analysis</button>
-                                            <button class="tablinks" onclick="openDialogue(event, '5')">Generator</button>
+                                            <button class="tablinks" onclick="openDialogue(event, '4')">Song Analysis</button>
+                                            <button class="tablinks" onclick="openDialogue(event, '5')">Playlist Generator</button>
                                             <button class="tablinks" onclick="openDialogue(event, '6')">Enjoy!</button>
                                         </div>
                                     </div>
                                     <div id="1" class="tabcontent">
-                                        <h3 class="list-item-description">Click the button and sit back as SpotVac works</h3>
-                                        <p>Filler text to be written later</p>
+                                        <h3 class="list-item-description">Determine what playlists you want sorted</h3>
+                                        <p class="about2">
+                                            For privacy reasons, SpotVac is designed to only have access to your public playlists.
+                                            If you would like SpotVac to organize songs from playlists other than your liked songs, make sure they are public before clicking the sort button.
+                                            Most playlists are public by default.
+                                            You can private playlists by going to your profile, right-clicking on the playlist, and clicking "Remove from Profile".
+                                            This will not delete the playlist, it will only remove the playlist from your public profile. 
+                                            (You can public or private them back after the playlists are made)
+                                        </p>
+                                        <img src="https://i.imgur.com/w9IYMXI.png" title="public playlists" class="tab-img" referrerpolicy="no-referrer"/>
                                     </div>
                                     <div id="2" class="tabcontent">
-                                        <h3 class="list-item-description">Determine what playlists you want sorted</h3>
-                                        <p>Filler text to be written later</p>
+                                        <h3 class="list-item-description">Click the button and authorize SpotVac to work with your Spotify account</h3>
+                                        <p class="about2">
+                                            Clicking the sort button will take you to a maximum of two screens. 
+                                            The first one will require you to log into your Spotify account, this is an official Spotify log in.
+                                            If this does not appear, it means you are already logged in.
+                                            After logging into your account, you will have to authorize SpotVacs access to your account. 
+                                            You will be redirected to a different official spotify page.
+                                            This access is based on the "modify public playlists" scope, meaning SpotVac can 
+                                            You are not required to unclude your Spotify url to sort, it will just skip re-authorizing your account.
+                                        </p>
+                                        <div class="img-container">
+                                            <a href="https://imgur.com/ZZgcEmA" target="_blank"><img src="https://i.imgur.com/ZZgcEmA.png" referrerpolicy="no-referrer" class="grid-img" title="Spotify Login Screen" /></a>
+                                            <a href="https://imgur.com/3Z3KpyM" target="_blank"><img src="https://imgur.com/3Z3KpyM.png" referrerpolicy="no-referrer" class="grid-img" title="SpotVac Authorization Screen" /></a>
+                                            <p class="grid-img-description">Spotify Login Screen</p>
+                                            <p class="grid-img-description">SpotVac Authorization Screen</p>
+                                        </div>
                                     </div>
                                     <div id="3" class="tabcontent">
                                         <h3 class="list-item-description">SpotVac collects data about your publicly available songs</h3>
-                                        <p>Filler text to be written later</p>
+                                        <p class="about2">
+                                            In its current iteration, SpotVac goes through the publily available playlists on your profile and collects the unique ids of every song.
+                                            Then SpotVac uses the Spotify API to collect detailed song information about each song.
+                                            Depending on how many playlists and songs were available to SpotVac, the collection may take a couple of minutes.
+                                            This process is limited by the amount of song information that SpotVac is allowed to request at a time.
+                                            For more information on the Spotify API see the documentation in the footer.
+                                        </p>
+                                        <a href="https://developer.spotify.com/documentation/web-api/reference/get-audio-features" target="_blank" ><img src="https://i.imgur.com/0ef2vEJ.png" referrerpolicy="no-referrer" title="Spotify Audio Features" class="tab-img"/></a>
                                     </div>
                                     <div id="4" class="tabcontent">
-                                        <h3 class="list-item-description">These songs are analyzed and sorted</h3>
-                                        <p>Filler text to be written later</p>
+                                        <h3 class="list-item-description">SpotVac then analyzes your music</h3>
+                                        <p class="about2">
+                                            Spotify provides a lot of information about a song, but genre is not one of them.
+                                            Although SpotVac is not able to sort music into their respective genres (yet) it is often beneficial to not just sort along these lines.
+                                            Most often, good playlists have multiple genres of music that express the same mood.
+                                            For example: the 10th most followed playlist on Spotify is Beast Mode which has a mix of Rap, Pop, and EDM music.
+                                            Although it has all these different genres of music, it does not include sad or tired music (and each of those genres have songs like that) because then you won't hit your new max.
+                                        </p><br>
+                                        <p class="about2">
+                                            Thayer's classification of music (shown below) can be described in a couple different ways, but the way SpotVac interprets the music is this.
+                                            There are two main values that SpotVac looks at: valence and energy.
+                                            Valence is a way of describing how happy a song sounds, and SpotVac uses its value to determine how far left or right the song will end up on the chart.
+                                            A song with low valence expresses more negative emotions than positive ones (that is not to say that negative music is bad) and will be placed further to the left.
+                                            Energy is more self explanatory, its just how much energy the listener feels during the song.
+                                            This is not in reference to emotional responses felt during the song (like if you felt chills or tears).
+                                            Low energy songs are put closer to the bottom of the chart and higher energy songs are put closer to the top.
+                                        </p>
+                                        <img src="https://i.imgur.com/7e7jmtN.jpg"  class="tab-img"  title="Thayer's Music Classification" referrerpolicy="no-referrer"/>
                                     </div>
                                     <div id="5" class="tabcontent">
                                         <h3 class="list-item-description">Playlists are then automatically generated on your profile</h3>
-                                        <p>Filler text to be written later</p>
+                                        <p class="about2">
+                                            SpotVac currently sorts music into five categories: Happy, Angry, Sad, Peaceful, and Calm.
+                                            It does this because music tastes and playlist lengths vary greatly and this is the best way to ensure each palylists gets a good amount of songs.
+                                            In the future, SpotVac will be upgraded to do this more dynamically, and allow the user to make more decisions about what it does.
+                                            The goal is to make a couple strong playlists that can be esaily fine tuned, rather than spending a lot of time making everything perfect off the bat.
+                                        </p><br>
+                                        <p class="about2">
+                                            While SpotVac creates these playlits and adds the songs to them, they will be on your public profile with the name "SpotVac: Happy" depending on the playlist.
+                                            It is important during this process to not make the playlists private as SpotVac does not have access to private playlists and songs may not get added if this happens.
+                                            If you do make them private, songs will be lost and the process will have to be restarted from the beginning.
+                                            The process should not take longer than 10 minutes, unless you have a rediculous amout of songs.
+                                        </p>
+                                        <img src="https://gifdb.com/images/high/shapes-sorting-trick-4uhvzfkscigipz96.webp" class="tab-img"/>
                                     </div>
                                     <div id="6" class="tabcontent">
-                                        <h3 class="list-item-description">Sit back and enjoy your sorted music library!</h3>
-                                        <p>Filler text to be written later</p>
+                                        <h3 class="list-item-description">Enjoy your sorted music library!</h3>
+                                        <p class="about2">
+                                            If everything worked properly, then you should have five new playlists that are nicely sorted.
+                                            If everything did not work properly, then send me a message on either twitter or instagram, or open an issue on the github repository.
+                                            At this point, I would like to thank you for trusting your music selection with SpotVac.
+                                            SpotVac was a fun project I (slowly) made for my friends becuase I wanted to both practice my coding in a meaningful way.
+                                            The whole project took about two summers, and its my first self-made project.
+                                        </p>
+                                        <img src="https://i.imgur.com/NlbWYLz.png" class="tab-img" title="SpotVac playlists" referrerpolicy="no-referrer"/>
                                     </div>
                                     
                                     
@@ -128,7 +197,7 @@ also consider React for interactivity -->
                     <span class="logo-span">
                         <h3><a href="/" class="logo-button footer-link">SpotVac</a></h3>
                     </span>
-                    <div class="footer-label footer-links">
+                    <div id="Documentation" class="footer-label footer-links">
                         <h3>
                             <a class="footer-link" href="/documentation">Documentation</a>
                         </h3>
@@ -163,22 +232,22 @@ also consider React for interactivity -->
                             <a class="footer-link" href="/contact">Contact</a>
                         </h3>
 
-
-
                         <!-- This should be an ordered list that leads to multiple other pages with more information on their respective topic -->
                         <ul class="footer-ul">
                             <li class="footer-li">
-                                <a class="footer-sub-link" href="">Contact</a>
+                                <a class="footer-sub-link" href="https://twitter.com/spotvac_music">Twitter</a>
                             </li>
+                            <li class="footer-li">
+                                <a class="footer-sub-link" href="https://www.instagram.com/sarbsey/">Instagram</a>
+                            </li>
+                            <!--
                             <li class="footer-li">
                                 <a class="footer-sub-link" href="">Contact</a>
                             </li>
                             <li class="footer-li">
                                 <a class="footer-sub-link" href="">Contact</a>
                             </li>
-                            <li class="footer-li">
-                                <a class="footer-sub-link" href="">Contact</a>
-                            </li>
+                            -->
                         </ul>
                         
                     </div>
@@ -192,16 +261,13 @@ also consider React for interactivity -->
                         <!-- This should be an ordered list that leads to multiple other pages with more information on their respective topic -->
                         <ul class="footer-ul">
                             <li class="footer-li">
-                                <a class="footer-link footer-sub-link" href="">Other Links</a>
+                                <a class="footer-link footer-sub-link" href="/log">Dev Log</a>
                             </li>
                             <li class="footer-li">
-                                <a class="footer-link footer-sub-link" href="">Other Links</a>
+                                <a class="footer-link footer-sub-link" href="https://www.researchgate.net/publication/334084112_Feel_the_Moosic_Emotion-based_Music_Selection_and_Recommendation">Music-Emotion Research</a>
                             </li>
                             <li class="footer-li">
-                                <a class="footer-link footer-sub-link" href="">Other Links</a>
-                            </li>
-                            <li class="footer-li">
-                                <a class="footer-link footer-sub-link" href="">Other Links</a>
+                                <a class="footer-link footer-sub-link" href="https://navdeepsinghh.medium.com/identifying-the-genre-of-a-song-with-neural-networks-851db89c42f0">Music Genre NN</a>
                             </li>
                         </ul>
                     </div>
@@ -214,6 +280,8 @@ also consider React for interactivity -->
                         2023
                         <!-- -->
                         Eric Sarbacker
+                        <!-- -->
+                        | All Rights Reserved
                     </span>
                 </p>
             </footer>
@@ -244,7 +312,7 @@ also consider React for interactivity -->
     update()
         var intervalId = setInterval(function() {
             update()
-    }, 50000)
+    }, 100000)
 
 </script>
 

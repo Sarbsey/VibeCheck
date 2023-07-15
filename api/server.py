@@ -100,19 +100,6 @@ def counter_update():
   return str(num_list)
 
 
-
-
-'''
-
-if __name__ == '__main__':
-    app.run(port="5000", debug=True)
-
-#finish later
-@app.route("/test")
-def test():
-  return render_template('test.html')
-
-
 @app.route("/documentation")
 def documentation():
   return render_template('construction.html')
@@ -125,7 +112,13 @@ def contact():
 def other_links():
   return render_template('construction.html')
 
-@app.route('/profile/<name>')
-def profile(name):
+@app.route("/log")
+def other_links():
+  return render_template('construction.html')
+
+
+'''
+if __name__ == '__main__':
+    app.run(port="5000", debug=True)
 
 '''
