@@ -13,7 +13,7 @@ import webbrowser
 import requests
 import secrets
 import string
-import Spotvac_functions as sf
+#import Spotvac_functions as sf
 import faunadatafunctions as fdb
 import pandas as pd
 import time
@@ -40,9 +40,5 @@ final = {
 lap = '4oA5fkQGa2rI7tmGJGT7GT'
 track = '6ECp64rv50XVz93WvxXMGF'
 
-full_data = pd.read_csv('full_data.csv')
-full_list = pd.read_csv('full_list.csv')
-
-bruh3 = pd.merge(full_data, full_list)
-
-print(len(bruh3))
+g = fdb.length()
+print(g)

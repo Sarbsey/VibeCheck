@@ -45,7 +45,7 @@ def launch_spotvac():
     '''
     full_user_info = session.get('full_user_info', None)
     sp = session.get('spotipy_request', None)
-    print('now running spotvac')
+
     sf.run_spotvac(sp, full_user_info)
 
     return redirect("/", code=302)
@@ -70,7 +70,7 @@ def callback():
 
   session['spotipy_request'] = sp
   session['full_user_info'] = submit
-  print('redirecting to launch spotvac')
+
   return redirect("/launch_spotvac", code=302)
 
 
@@ -99,7 +99,7 @@ def dev_log():
 
 
 
+'''
 if __name__ == '__main__':
     app.run(port="5000", debug=True)
-
-''''''
+'''

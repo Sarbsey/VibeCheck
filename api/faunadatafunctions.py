@@ -49,7 +49,7 @@ def length():
     q.count(
     q.paginate(
     q.documents(
-    q.collection('spotvac_users')))))
+    q.collection('spotvac_users')), size = 100000)))
 
     db_length = length['data'][0]
     return db_length
