@@ -14,31 +14,48 @@ import requests
 import secrets
 import string
 #import Spotvac_functions as sf
-import faunadatafunctions as fdb
+#import faunadatafunctions as fdb
 import pandas as pd
 import time
 import random
 import json
 
-username = '22mdb5fhocl2fobpsjbxvvkra'
-client_id = os.environ['client_ID']
-client_secret = os.environ['client_secret']
-manager = SpotifyClientCredentials(client_id,client_secret)
-token = 6
-sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
+def retrieve(ts):
+    fc = FaunaClient(
+    secret=os.environ['fauna_secret'],
+    endpoint="https://db.fauna.com/"
+    )
+    
 
-full_user_info = {
-    'data':{
-        'user_id': '22mdb5fhocl2fobpsjbxvvkra'
-    }
-}
-final = {
-    'energy':[3,4,7,4,2,2,4,5,2,7,8,9,2,7,6,5,3,32]
-}
+    g = fc.query(
+    q.match(
+    q.ref(
+    q.collection('spotvac_users')),  ts
+    ))
+    return g
 
 
-lap = '4oA5fkQGa2rI7tmGJGT7GT'
-track = '6ECp64rv50XVz93WvxXMGF'
+def look_up(ts):
+    fc = FaunaClient(
+    secret=os.environ['fauna_secret'],
+    endpoint="https://db.fauna.com/"
+    )
 
-g = fdb.length()
-print(g)
+    fdb_user_search = fc.query(
+    q.paginate(q.match(
+    q.index("test2"), ts)) 
+    )
+    
+    fdb_search_results = fdb_user_search['data']
+    #print(f' search found {fdb_search_results}')
+    user_verification_data = fc.query(
+        q.map_(
+        q.lambda_("ts", q.get(q.var("ts"))),
+        fdb_search_results
+    ))
+
+    return user_verification_data
+
+
+f = look_up('22mdb5fhocl2fobpsjbxvvkra')
+print(f[-1]['data'])

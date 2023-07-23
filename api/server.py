@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, session
+from flask import Flask, request, render_template, redirect
 from flask_session import Session
 import spotipy
 from spotipy import SpotifyClientCredentials
@@ -28,23 +28,21 @@ def index():
 stateKey = 'spotify_auth_state'
 
 
-
-
-@app.route("/launch_spotvac", methods=['GET','POST'])
-def launch_spotvac():
+@app.route("/request_authorization")
+def request_authorization():
   if request.method == "POST":
 
     full_auth_url = sf.request_authorization()
     
-    return redirect(full_auth_url, code=302)
-  
+  return redirect(full_auth_url, code=302)
 
-  elif request.method == "GET":
+
+@app.route("/launch_spotvac", methods=['GET','POST'])
+def launch_spotvac(full_user_info):
     '''
     Run SpotVac
     '''
-    full_user_info = session.get('full_user_info', None)
-    sp = session.get('spotipy_request', None)
+    sp = full_user_info['spotipy_data']['spotipy_authorization']
 
     sf.run_spotvac(sp, full_user_info)
 
@@ -57,21 +55,16 @@ def launch_spotvac():
 def callback():
   token_data = sf.generate_token()
   user_info = sf.generate_user_info(token_data)
-  submit = fdb.format_data(user_info, token_data)
-  fdb.submit(submit)
-  print('data submitted to fdb')
-
-
   client_id = os.environ['client_ID']
   client_secret = os.environ['client_secret']
   manager = SpotifyClientCredentials(client_id,client_secret)
   sp = spotipy.Spotify(client_credentials_manager=manager, auth=token_data['access_token'])
 
 
-  session['spotipy_request'] = sp
-  session['full_user_info'] = submit
+  submit = fdb.format_data(user_info, token_data, sp)
+  fdb.submit(submit)
 
-  return redirect("/launch_spotvac", code=302)
+  return redirect("/launch_spotvac", full_user_info=submit, code=302)
 
 
 
