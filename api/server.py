@@ -41,7 +41,11 @@ def launch_spotvac(full_user_info):
     '''
     Run SpotVac
     '''
-    sp = full_user_info['spotipy_data']['spotipy_authorization']
+    token = full_user_info['data']['token_data']['access_token']
+    client_id = os.environ['client_ID']
+    client_secret = os.environ['client_secret']
+    manager = SpotifyClientCredentials(client_id,client_secret)
+    sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
 
     sf.run_spotvac(sp, full_user_info)
 
@@ -60,7 +64,7 @@ def callback():
   sp = spotipy.Spotify(client_credentials_manager=manager, auth=token_data['access_token'])
 
 
-  submit = fdb.format_data(user_info, token_data, sp)
+  submit = fdb.format_data(user_info, token_data)
   fdb.submit(submit)
 
   return redirect("/launch_spotvac", full_user_info=submit, code=302)
