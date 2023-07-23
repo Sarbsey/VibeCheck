@@ -1,5 +1,4 @@
 from flask import Flask, request, render_template, redirect
-from flask_session import Session
 import spotipy
 from spotipy import SpotifyClientCredentials
 import os
@@ -17,7 +16,7 @@ app.config['SESSION PERMANENT'] = False
 secret_key = os.urandom(12).hex()
 app.config['SECREY_KEY'] = secret_key
 app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
+
 
 
 
