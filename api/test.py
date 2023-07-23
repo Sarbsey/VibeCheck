@@ -1,0 +1,48 @@
+import spotipy
+import os
+from spotipy import SpotifyClientCredentials, util, SpotifyOAuth, SpotifyException
+from dotenv import load_dotenv
+load_dotenv()
+from faunadb import query as q
+from faunadb.objects import Ref
+from faunadb.client import FaunaClient
+import os
+from urllib.request import urlretrieve
+from urllib.parse import urlencode
+import webbrowser
+import requests
+import secrets
+import string
+import Spotvac_functions as sf
+import faunadatafunctions as fdb
+import pandas as pd
+import time
+import random
+import json
+
+username = '22mdb5fhocl2fobpsjbxvvkra'
+client_id = os.environ['client_ID']
+client_secret = os.environ['client_secret']
+manager = SpotifyClientCredentials(client_id,client_secret)
+token = "BQDUQZzCQu-LQ2EK7uaTL4U04Y3oLt7q6o_zNS8EdO1TN17amdebFmN087Cxp1i4Gyl27UUa8wvPkHqh2alBm-9Ue07TvSSIh1F5lXmYo_RfQDMe_zlt4nwLSwe-mOuIty_jZe4lx2Q12HmgFrCKQ3ph2YkUDld1Nq0tGPjbtRxD3q2FdHZ6BAs12R17QC9M5YdpbS7mUTUCJaqIAV6--fvwpV3Y05x4a4IEMA881ky7bff4"
+sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
+
+full_user_info = {
+    'data':{
+        'user_id': '22mdb5fhocl2fobpsjbxvvkra'
+    }
+}
+final = {
+    'energy':[3,4,7,4,2,2,4,5,2,7,8,9,2,7,6,5,3,32]
+}
+
+
+lap = '4oA5fkQGa2rI7tmGJGT7GT'
+track = '6ECp64rv50XVz93WvxXMGF'
+
+full_data = pd.read_csv('full_data.csv')
+full_list = pd.read_csv('full_list.csv')
+
+bruh3 = pd.merge(full_data, full_list)
+
+print(len(bruh3))

@@ -1,20 +1,24 @@
 from flask import Flask, request, render_template, redirect, session
 from flask_session import Session
 import spotipy
-import spotipy.util as util
+from spotipy import SpotifyClientCredentials
 import os
+import pandas as pd
 from dotenv import load_dotenv
-import secrets
-import string
-import requests
 from urllib.parse import urlencode
-import base64
-from util import button
-from util import faunadatafunctions as fdb
-from util import Spotvac_functions as sf
+#from util import button
+#from util import faunadatafunctions as fdb
+#from util import Spotvac_functions as sf
+import faunadatafunctions as fdb
+import Spotvac_functions as sf
 
 
 app = Flask(__name__)
+app.config['SESSION PERMANENT'] = False
+secret_key = os.urandom(12).hex()
+app.config['SECREY_KEY'] = secret_key
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
 
 
@@ -24,73 +28,51 @@ def index():
 
 stateKey = 'spotify_auth_state'
 
+
+
+
 @app.route("/launch_spotvac", methods=['GET','POST'])
 def launch_spotvac():
+  if request.method == "POST":
+
+    full_auth_url = sf.request_authorization()
+    
+    return redirect(full_auth_url, code=302)
   
 
-  if request.method == "POST":
-    user_url = request.form['url-input']
-    if user_url:
-      '''
-      button.verify(user_url)
-      button.run_spotvac(user_url)
-      '''
-      state = ''.join(secrets.choice(string.ascii_uppercase + string.ascii_lowercase) for i in range(16))
+  elif request.method == "GET":
+    '''
+    Run SpotVac
+    '''
+    full_user_info = session.get('full_user_info', None)
+    sp = session.get('spotipy_request', None)
+    print('now running spotvac')
+    sf.run_spotvac(sp, full_user_info)
 
-      authorize_url = os.environ['authorize_url']
-      client_id = os.environ['client_ID']
-      client_secret = os.environ['client_secret']
-      redirect_uri = os.environ['redirect_url']
-      scope = 'playlist-modify-public'
-
-      auth_dict = {
-          'client_id': client_id,
-          'response_type': 'code',
-          'redirect_uri': redirect_uri,
-          'scope': scope,
-          'state': state
-      }
-
-      params = urlencode(auth_dict)
-      full_auth_url = f"{authorize_url}" + params
-
-    else:
-      print('bruh')
-    return redirect(full_auth_url, code=302)
-  else:
     return redirect("/", code=302)
+
+
 
 
 @app.route("/callback", methods=['GET','POST'])
 def callback():
-  token_url = os.environ['token_url']
-  client_id = os.environ['client_ID']
-  client_secret = os.environ['client_secret']
-  redirect_uri = os.environ['redirect_url']
-  scope = 'playlist-modify-public'
-  code = request.args.get('code')
-  
-
-  auth_header = base64.urlsafe_b64encode((client_id + ':' + client_secret).encode())
-  headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Authorization': 'Basic %s' % auth_header.decode('ascii')
-  }
-
-  data = {
-    'grant_type': 'authorization_code',
-    'code': code,
-    'redirect_uri': redirect_uri
-  }
-  
-
-
-  full_access_token = requests.post(url=token_url, data=data, headers=headers)
-  token_data = full_access_token.json()
-  user_info = sf.generate_token(token_data)
+  token_data = sf.generate_token()
+  user_info = sf.generate_user_info(token_data)
   submit = fdb.format_data(user_info, token_data)
   fdb.submit(submit)
-  return redirect("/", code=302)
+  print('data submitted to fdb')
+
+
+  client_id = os.environ['client_ID']
+  client_secret = os.environ['client_secret']
+  manager = SpotifyClientCredentials(client_id,client_secret)
+  sp = spotipy.Spotify(client_credentials_manager=manager, auth=token_data['access_token'])
+
+
+  session['spotipy_request'] = sp
+  session['full_user_info'] = submit
+  print('redirecting to launch spotvac')
+  return redirect("/launch_spotvac", code=302)
 
 
 
@@ -117,8 +99,8 @@ def dev_log():
   return render_template('construction.html')
 
 
-'''
+
 if __name__ == '__main__':
     app.run(port="5000", debug=True)
 
-'''
+''''''

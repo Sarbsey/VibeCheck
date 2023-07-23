@@ -12,7 +12,6 @@ def format_data(user_info, token_data):
 
     submit = {"data":{
     "user_id" : user_id,
-    ""
     "user_data":{
         "FirstName":FirstName,
         "LastName":LastName
