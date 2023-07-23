@@ -6,11 +6,10 @@ import os
 import pandas as pd
 from dotenv import load_dotenv
 from urllib.parse import urlencode
-#from util import button
-#from util import faunadatafunctions as fdb
-#from util import Spotvac_functions as sf
-import faunadatafunctions as fdb
-import Spotvac_functions as sf
+from util import button
+from util import faunadatafunctions as fdb
+from util import Spotvac_functions as sf
+
 
 
 app = Flask(__name__)
