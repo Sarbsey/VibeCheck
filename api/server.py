@@ -28,7 +28,7 @@ def index():
 stateKey = 'spotify_auth_state'
 
 
-@app.route("/request_authorization")
+@app.route("/request_authorization", methods=['GET','POST'])
 def request_authorization():
   if request.method == "POST":
 
