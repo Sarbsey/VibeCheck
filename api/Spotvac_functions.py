@@ -99,11 +99,11 @@ def generate_user_info(token_data):
 def run_spotvac(sp, full_user_info):
 
 
-    start = time.time()
+    #start = time.time()
     playlist_list = download_user_playlists(sp, full_user_info)
-    timer1 = time.time()
-    elapsed = timer1 - start
-    print(f'user playlists downloaded, time: {elapsed}')
+    #timer1 = time.time()
+    #elapsed = timer1 - start
+    #print(f'user playlists downloaded, time: {elapsed}')
 
 
     songs_list = pd.DataFrame()
@@ -112,15 +112,15 @@ def run_spotvac(sp, full_user_info):
       songs_list = pd.concat([songs_list, temp])
     
 
-    timer2 = time.time()
-    elapsed = timer2 - timer1
-    print(f'playlist tracks downloaded, time: {elapsed}')
+    #timer2 = time.time()
+    #elapsed = timer2 - timer1
+    #print(f'playlist tracks downloaded, time: {elapsed}')
 
 
     liked_songs = download_liked_songs(sp)
-    timer3 = time.time()
-    elapsed = timer3 - timer2
-    print(f'liked songs downloaded, time: {elapsed}')
+    #timer3 = time.time()
+    #elapsed = timer3 - timer2
+    #print(f'liked songs downloaded, time: {elapsed}')
 
 
     full_songs_list = pd.concat([songs_list, liked_songs])
@@ -130,26 +130,23 @@ def run_spotvac(sp, full_user_info):
     full_songs_dataset = full_songs_dataset.reset_index().reset_index()
     full_songs_list = full_songs_list.reset_index().reset_index()
 
-    full_songs_list.to_csv('full_list2.csv')
-    full_songs_dataset.to_csv('full_data2.csv')
+    #full_songs_list.to_csv('full_list2.csv')
+    #full_songs_dataset.to_csv('full_data2.csv')
     final_dataset = pd.merge(full_songs_list, full_songs_dataset, on='level_0')
-    final_dataset.to_csv('final2.csv')
-    timer4 = time.time()
-    elapsed = timer4 - timer3
-    print(f'song features downloaded, time: {elapsed}')
+    #final_dataset.to_csv('final2.csv')
+    #timer4 = time.time()
+    #elapsed = timer4 - timer3
+    #print(f'song features downloaded, time: {elapsed}')
     spotvac_playlist_list = create_spotipy_playlists(sp, full_user_info)
-    timer5 = time.time()
-    elapsed = timer5 - timer4
-    print(f'playlists created, time: {elapsed}')
+    #timer5 = time.time()
+    #elapsed = timer5 - timer4
+    #print(f'playlists created, time: {elapsed}')
     upload_songs(sp, full_user_info, final_dataset, spotvac_playlist_list)
-    timer6 = time.time()
-    elapsed = timer6 - timer5
-    print(f'songs uploaded, time: {elapsed}')
+    #timer6 = time.time()
+    #elapsed = timer6 - timer5
+    #print(f'songs uploaded, time: {elapsed}')
 
     return
-
-
-
 
 
 def download_user_playlists(sp, full_user_info):
@@ -246,10 +243,10 @@ def download_song_data(sp, full_songs_list):
     
 
     length = len(full_songs_list)
-    print(f'There are {length} songs in the full list')
+    #print(f'There are {length} songs in the full list')
     repeats = int(length / 50)
     remainder = length % 50
-    print(f'The finction should repeat {repeats+1} times with a final list of length {remainder}')
+    #print(f'The finction should repeat {repeats+1} times with a final list of length {remainder}')
 
     full_song_dataset = pd.DataFrame()
     temp_list = []
@@ -260,7 +257,7 @@ def download_song_data(sp, full_songs_list):
             n_songs = len(temp_list)
             temp = get_songs_features(sp, temp_list, n_songs)
             full_song_dataset = pd.concat([full_song_dataset, temp])
-            print(f'song data has been retrieved with a list of length {len(temp_list)}')
+            #print(f'song data has been retrieved with a list of length {len(temp_list)}')
             temp_list = []
             k += 1
             
@@ -270,10 +267,10 @@ def download_song_data(sp, full_songs_list):
             n_songs = len(temp_list)
             temp = get_songs_features(sp, temp_list, n_songs)
             full_song_dataset = pd.concat([full_song_dataset, temp])
-            print(f'song data has been retrieved with a list of length {len(temp_list)}')
+            #print(f'song data has been retrieved with a list of length {len(temp_list)}')
             temp_list = []
             k+=1
-            print(f'song data had its final retrieval with a total of {k} repeats')
+            #print(f'song data had its final retrieval with a total of {k} repeats')
     i+= 1
     return full_song_dataset
 
@@ -369,6 +366,7 @@ def evaluate_energy(preprocessed_dataset):
     return final
 '''
 
+
 def create_spotipy_playlists(sp, full_user_info):
     username = full_user_info['data']['user_id']
     #print('Now creating playlists')
@@ -418,7 +416,7 @@ def upload_songs(sp, full_user_info, final_dataset, spotvac_playlist_list):
 
         if not q == 5:
             sp.user_playlist_add_tracks(user=username,playlist_id=spotvac_playlist_list['playlist_id'][q],tracks=[final['song_id'][i]])
-            print(f"Song {final['name'][i]} added to the playlist {spotvac_playlist_list['name'][q]}!")
+            #print(f"Song {final['name'][i]} added to the playlist {spotvac_playlist_list['name'][q]}!")
             i+=1
         else:
             i+=1

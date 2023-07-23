@@ -54,6 +54,7 @@ def length():
     db_length = length['data'][0]
     return db_length
 
+
 def look_up(user_id):
     fc = FaunaClient(
     secret=os.environ['fauna_secret'],

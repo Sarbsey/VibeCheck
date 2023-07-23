@@ -24,7 +24,7 @@ username = '22mdb5fhocl2fobpsjbxvvkra'
 client_id = os.environ['client_ID']
 client_secret = os.environ['client_secret']
 manager = SpotifyClientCredentials(client_id,client_secret)
-token = "BQDUQZzCQu-LQ2EK7uaTL4U04Y3oLt7q6o_zNS8EdO1TN17amdebFmN087Cxp1i4Gyl27UUa8wvPkHqh2alBm-9Ue07TvSSIh1F5lXmYo_RfQDMe_zlt4nwLSwe-mOuIty_jZe4lx2Q12HmgFrCKQ3ph2YkUDld1Nq0tGPjbtRxD3q2FdHZ6BAs12R17QC9M5YdpbS7mUTUCJaqIAV6--fvwpV3Y05x4a4IEMA881ky7bff4"
+token = 6
 sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
 
 full_user_info = {
