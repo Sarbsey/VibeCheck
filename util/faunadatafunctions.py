@@ -3,7 +3,7 @@ from faunadb.objects import Ref
 from faunadb.client import FaunaClient
 import os
 
-def format_data(user_info, token_data, sp):
+def format_data(user_info, token_data):
     name = user_info['display_name']
     name = name.split()
     user_id = user_info['id']
@@ -16,10 +16,7 @@ def format_data(user_info, token_data, sp):
         "FirstName":FirstName,
         "LastName":LastName,
             },
-    "spotipy_data":{
-        "token_data": token_data,
-        "spotipy_authorization": sp
-            },
+    "token_data": token_data,
         }
     }
 
