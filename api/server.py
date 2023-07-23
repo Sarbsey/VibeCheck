@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, session
+from flask_session import Session
 import spotipy
 from spotipy import SpotifyClientCredentials
 import os
@@ -10,13 +11,12 @@ from util import faunadatafunctions as fdb
 from util import Spotvac_functions as sf
 
 
-
 app = Flask(__name__)
 app.config['SESSION PERMANENT'] = False
 secret_key = os.urandom(12).hex()
 app.config['SECREY_KEY'] = secret_key
 app.config['SESSION_TYPE'] = 'filesystem'
-
+Session(app)
 
 
 
@@ -48,7 +48,6 @@ def launch_spotvac(full_user_info):
     sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
 
     sf.run_spotvac(sp, full_user_info)
-
     return redirect("/", code=302)
 
 
@@ -66,8 +65,8 @@ def callback():
 
   submit = fdb.format_data(user_info, token_data)
   fdb.submit(submit)
-
-  return redirect("/launch_spotvac", full_user_info=submit, code=302)
+  launch_spotvac(submit)
+  return redirect("/", code=302)
 
 
 
@@ -95,7 +94,7 @@ def dev_log():
 
 
 
-'''
-if __name__ == '__main__':
+
+'''if __name__ == '__main__':
     app.run(port="5000", debug=True)
 '''
