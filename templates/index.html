@@ -55,9 +55,9 @@ also consider React for interactivity -->
                                 </div>
                                 <div class="launch-button-container">
                                     <form action="{{ url_for('request_authorization') }}" method="POST">
-                                        <input name="url-input" type="text" class="username-input" placeholder="open.spotify.com/user/&#60user-id&#62">
+                                        <!-- <input name="url-input" type="text" class="username-input" placeholder="open.spotify.com/user/&#60user-id&#62"> -->
                                         <button class="launch-button" type="submit" onclick="performPost(), update()">
-                                            <span class="launch-button-text button-color">Sort!</span>
+                                            <span class="launch-button-text button-color">Sort  Now</span>
                                         </button>
                                     </form>
                                 </div>
@@ -271,6 +271,20 @@ also consider React for interactivity -->
                             </li>
                         </ul>
                     </div>
+                    <div id="Legal" class="footer-label footer-links">
+                        <h3>
+                            <a class="footer-link" href="/legal">Legal</a>
+                        </h3>
+
+
+                        <!-- This should be an ordered list that leads to multiple other pages with more information on their respective topic -->
+                        <ul class="footer-ul">
+                            <li class="footer-li">
+                                <a class="footer-sub-link" href="/legal">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                        </ul>
                 </nav>
                 <br>
                 <p class="legal">
@@ -308,12 +322,12 @@ also consider React for interactivity -->
             $("#count").html(data)
         });
     }
-/*
+
     update()
         var intervalId = setInterval(function() {
             update()
-    }, 10000000)
-*/
+    }, 120000)
+
 </script>
 
 
