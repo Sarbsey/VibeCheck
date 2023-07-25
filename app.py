@@ -50,8 +50,7 @@ def launch_spotvac(full_user_info):
     manager = SpotifyClientCredentials(client_id,client_secret)
     sp = spotipy.Spotify(client_credentials_manager=manager, auth=token)
 
-    #sf.run_spotvac(sp, full_user_info)
-    print(full_user_info)
+    sf.run_spotvac(sp, full_user_info)
 
     return redirect("/", code=302)
 
