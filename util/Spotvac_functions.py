@@ -43,7 +43,7 @@ def request_authorization():
     authorize_url = os.environ['authorize_url']
     client_id = os.environ['client_ID']
     redirect_uri = os.environ['redirect_url']
-    scope = 'playlist-modify-public user-library-read'
+    scope = 'playlist-modify-public user-library-read user-top-read'
 
     auth_dict = {
         'client_id': client_id,

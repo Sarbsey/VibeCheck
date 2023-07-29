@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>SpotVac | Playlist Manager</title>
+    <title>VibeCheck | Playlist Manager</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@ also consider React for interactivity -->
             <header id="header" class="header header-colors">
                 <div class="flex-box">
                     <a class="logo logo-link" href="">
-                        SpotVac | Playlist Generator
+                        VibeCheck | Playlist Generator
                     </a>
                 </div>
                 <nav class="nav-header">
@@ -50,7 +50,7 @@ also consider React for interactivity -->
                             <!-- This is basically the exact same container, but allows for cool shit if I get to it later -->
                                 <div class="launch-pretext">
                                     <h1 class="h1-launch-pretext pretext-color">Sort all of your music with just one click!</h1>
-                                    <!-- Make a button to count how many people use SpotVac -->
+                                    <!-- Make a button to count how many people use VibeCheck -->
                                     <h2 class="h2-launch-pretext pretext-color"><label  id="count"></label><!-- counter --> Libraries sorted so far</h2>
                                 </div>
                                 <div class="launch-button-container">
@@ -68,21 +68,21 @@ also consider React for interactivity -->
                                 <div class="processs-description-content">
                                     <div class="tab">
                                         <a class="anchor" id="about-section"></a>
-                                        <h1 class="about-header">What does SpotVac do?</h1>
+                                        <h1 class="about-header">What does VibeCheck do?</h1>
                                         <p class="about">
-                                            SpotVac was developed because many people on spotify have "liked music" playlists that number in the thousands, but no time or will to sort every song into its respective playlist.
-                                            Spotvac collects all of your liked music, plus any music from public playlists that you follow, and sorts them based on data from Spotify's API.
-                                            Spotvac is designed to be as simple as possible to use, with just one click your playlists will be sorted based on Thayer's human emotional classification model.
+                                            VibeCheck was developed because many people on spotify have "liked music" playlists that number in the thousands, but no time or will to sort every song into its respective playlist.
+                                            VibeCheck collects all of your liked music, plus any music from public playlists that you follow, and sorts them based on data from Spotify's API.
+                                            VibeCheck is designed to be as simple as possible to use, with just one click your playlists will be sorted based on Thayer's human emotional classification model.
                                         </p><br>
-                                        <h1 class="about-header">What information does SpotVac use?</h1>
+                                        <h1 class="about-header">What information does VibeCheck use?</h1>
                                         <p class="about">
-                                            In a world in internet privacy and data breaches, Spotvac was developed with the explicit intention of not collecting user information.
-                                            Unfortunately, in order to cooperate with the Spotify API, SpotVac collects a few minor pieces of information.
+                                            In a world in internet privacy and data breaches, VibeCheck was developed with the explicit intention of not collecting user information.
+                                            Unfortunately, in order to cooperate with the Spotify API, VibeCheck collects a few minor pieces of information.
                                             The information collected is the Spotify username and unique user id, which are publicly available. 
                                         </p><br>
                                         <div class="about-header2">
-                                            <h1>How does SpotVac work?</h1>
-                                            <p>Explore the options below to understand what SpotVac is doing behind the scenes.</p>
+                                            <h1>How does VibeCheck work?</h1>
+                                            <p>Explore the options below to understand what VibeCheck is doing behind the scenes.</p>
                                         </div>
                                         <div class="tab-container">
                                             <button class="tablinks" onclick="openDialogue(event, '1')" id="defaultOpen">Playlist Selection</button>
@@ -97,8 +97,8 @@ also consider React for interactivity -->
                                     <div id="1" class="tabcontent">
                                         <h3 class="list-item-description">Determine what playlists you want sorted</h3>
                                         <p class="about2">
-                                            For privacy reasons, SpotVac is designed to only have access to your public playlists.
-                                            If you would like SpotVac to organize songs from playlists other than your liked songs, make sure they are public before clicking the sort button.
+                                            For privacy reasons, VibeCheck is designed to only have access to your public playlists.
+                                            If you would like VibeCheck to organize songs from playlists other than your liked songs, make sure they are public before clicking the sort button.
                                             Most playlists are public by default.
                                             You can private playlists by going to your profile, right-clicking on the playlist, and clicking "Remove from Profile".
                                             This will not delete the playlist, it will only remove the playlist from your public profile. 
@@ -107,47 +107,47 @@ also consider React for interactivity -->
                                         <img src="https://i.imgur.com/w9IYMXI.png" title="public playlists" class="tab-img" referrerpolicy="no-referrer"/>
                                     </div>
                                     <div id="2" class="tabcontent">
-                                        <h3 class="list-item-description">Click the button and authorize SpotVac to work with your Spotify account</h3>
+                                        <h3 class="list-item-description">Click the button and authorize VibeCheck to work with your Spotify account</h3>
                                         <p class="about2">
                                             Clicking the sort button will take you to a maximum of two screens. 
                                             The first one will require you to log into your Spotify account, this is an official Spotify log in.
                                             If this does not appear, it means you are already logged in.
-                                            After logging into your account, you will have to authorize SpotVacs access to your account. 
+                                            After logging into your account, you will have to authorize VibeChecks access to your account. 
                                             You will be redirected to a different official spotify page.
-                                            This access is based on the "modify public playlists" scope, meaning SpotVac can 
+                                            This access is based on the "modify public playlists" scope, meaning VibeCheck can 
                                             You are not required to unclude your Spotify url to sort, it will just skip re-authorizing your account.
                                         </p>
                                         <div class="img-container">
                                             <a href="https://imgur.com/ZZgcEmA" target="_blank"><img src="https://i.imgur.com/ZZgcEmA.png" referrerpolicy="no-referrer" class="grid-img" title="Spotify Login Screen" /></a>
-                                            <a href="https://imgur.com/3Z3KpyM" target="_blank"><img src="https://imgur.com/3Z3KpyM.png" referrerpolicy="no-referrer" class="grid-img" title="SpotVac Authorization Screen" /></a>
+                                            <a href="https://imgur.com/3Z3KpyM" target="_blank"><img src="https://imgur.com/3Z3KpyM.png" referrerpolicy="no-referrer" class="grid-img" title="VibeCheck Authorization Screen" /></a>
                                             <p class="grid-img-description">Spotify Login Screen</p>
-                                            <p class="grid-img-description">SpotVac Authorization Screen</p>
+                                            <p class="grid-img-description">VibeCheck Authorization Screen</p>
                                         </div>
                                     </div>
                                     <div id="3" class="tabcontent">
-                                        <h3 class="list-item-description">SpotVac collects data about your publicly available songs</h3>
+                                        <h3 class="list-item-description">VibeCheck collects data about your publicly available songs</h3>
                                         <p class="about2">
-                                            In its current iteration, SpotVac goes through the publily available playlists on your profile and collects the unique ids of every song.
-                                            Then SpotVac uses the Spotify API to collect detailed song information about each song.
-                                            Depending on how many playlists and songs were available to SpotVac, the collection may take a couple of minutes.
-                                            This process is limited by the amount of song information that SpotVac is allowed to request at a time.
+                                            In its current iteration, VibeCheck goes through the publily available playlists on your profile and collects the unique ids of every song.
+                                            Then VibeCheck uses the Spotify API to collect detailed song information about each song.
+                                            Depending on how many playlists and songs were available to VibeCheck, the collection may take a couple of minutes.
+                                            This process is limited by the amount of song information that VibeCheck is allowed to request at a time.
                                             For more information on the Spotify API see the documentation in the footer.
                                         </p>
                                         <a href="https://developer.spotify.com/documentation/web-api/reference/get-audio-features" target="_blank" ><img src="https://i.imgur.com/0ef2vEJ.png" referrerpolicy="no-referrer" title="Spotify Audio Features" class="tab-img"/></a>
                                     </div>
                                     <div id="4" class="tabcontent">
-                                        <h3 class="list-item-description">SpotVac then analyzes your music</h3>
+                                        <h3 class="list-item-description">VibeCheck then analyzes your music</h3>
                                         <p class="about2">
                                             Spotify provides a lot of information about a song, but genre is not one of them.
-                                            Although SpotVac is not able to sort music into their respective genres (yet) it is often beneficial to not just sort along these lines.
+                                            Although VibeCheck is not able to sort music into their respective genres (yet) it is often beneficial to not just sort along these lines.
                                             Most often, good playlists have multiple genres of music that express the same mood.
                                             For example: the 10th most followed playlist on Spotify is Beast Mode which has a mix of Rap, Pop, and EDM music.
                                             Although it has all these different genres of music, it does not include sad or tired music (and each of those genres have songs like that) because then you won't hit your new max.
                                         </p><br>
                                         <p class="about2">
-                                            Thayer's classification of music (shown below) can be described in a couple different ways, but the way SpotVac interprets the music is this.
-                                            There are two main values that SpotVac looks at: valence and energy.
-                                            Valence is a way of describing how happy a song sounds, and SpotVac uses its value to determine how far left or right the song will end up on the chart.
+                                            Thayer's classification of music (shown below) can be described in a couple different ways, but the way VibeCheck interprets the music is this.
+                                            There are two main values that VibeCheck looks at: valence and energy.
+                                            Valence is a way of describing how happy a song sounds, and VibeCheck uses its value to determine how far left or right the song will end up on the chart.
                                             A song with low valence expresses more negative emotions than positive ones (that is not to say that negative music is bad) and will be placed further to the left.
                                             Energy is more self explanatory, its just how much energy the listener feels during the song.
                                             This is not in reference to emotional responses felt during the song (like if you felt chills or tears).
@@ -158,14 +158,14 @@ also consider React for interactivity -->
                                     <div id="5" class="tabcontent">
                                         <h3 class="list-item-description">Playlists are then automatically generated on your profile</h3>
                                         <p class="about2">
-                                            SpotVac currently sorts music into five categories: Happy, Angry, Sad, Peaceful, and Calm.
+                                            VibeCheck currently sorts music into five categories: Happy, Angry, Sad, Peaceful, and Calm.
                                             It does this because music tastes and playlist lengths vary greatly and this is the best way to ensure each palylists gets a good amount of songs.
-                                            In the future, SpotVac will be upgraded to do this more dynamically, and allow the user to make more decisions about what it does.
+                                            In the future, VibeCheck will be upgraded to do this more dynamically, and allow the user to make more decisions about what it does.
                                             The goal is to make a couple strong playlists that can be esaily fine tuned, rather than spending a lot of time making everything perfect off the bat.
                                         </p><br>
                                         <p class="about2">
-                                            While SpotVac creates these playlits and adds the songs to them, they will be on your public profile with the name "SpotVac: Happy" depending on the playlist.
-                                            It is important during this process to not make the playlists private as SpotVac does not have access to private playlists and songs may not get added if this happens.
+                                            While VibeCheck creates these playlits and adds the songs to them, they will be on your public profile with the name "VibeCheck: Happy" depending on the playlist.
+                                            It is important during this process to not make the playlists private as VibeCheck does not have access to private playlists and songs may not get added if this happens.
                                             If you do make them private, songs will be lost and the process will have to be restarted from the beginning.
                                             The process should not take longer than 10 minutes, unless you have a rediculous amout of songs.
                                         </p>
@@ -176,11 +176,11 @@ also consider React for interactivity -->
                                         <p class="about2">
                                             If everything worked properly, then you should have five new playlists that are nicely sorted.
                                             If everything did not work properly, then send me a message on either twitter or instagram, or open an issue on the github repository.
-                                            At this point, I would like to thank you for trusting your music selection with SpotVac.
-                                            SpotVac was a fun project I (slowly) made for my friends becuase I wanted to both practice my coding in a meaningful way.
+                                            At this point, I would like to thank you for trusting your music selection with VibeCheck.
+                                            VibeCheck was a fun project I (slowly) made for my friends becuase I wanted to both practice my coding in a meaningful way.
                                             The whole project took about two summers, and its my first self-made project.
                                         </p>
-                                        <img src="https://i.imgur.com/NlbWYLz.png" class="tab-img" title="SpotVac playlists" referrerpolicy="no-referrer"/>
+                                        <img src="https://i.imgur.com/NlbWYLz.png" class="tab-img" title="VibeCheck playlists" referrerpolicy="no-referrer"/>
                                     </div>
                                     
                                     
@@ -195,7 +195,7 @@ also consider React for interactivity -->
             <footer class="footer footer-colors">
                 <nav class="nav-footer">
                     <span class="logo-span">
-                        <h3><a href="/" class="logo-button footer-link">SpotVac</a></h3>
+                        <h3><a href="/" class="logo-button footer-link">VibeCheck</a></h3>
                     </span>
                     <div id="Documentation" class="footer-label footer-links">
                         <h3>
@@ -206,7 +206,7 @@ also consider React for interactivity -->
                         <!-- This should be an ordered list that leads to multiple other pages with more information on their respective topic -->
                         <ul class="footer-ul">
                             <li class="footer-li">
-                                <a class="footer-sub-link" href="https://github.com/Sarbsey/Spotvac">
+                                <a class="footer-sub-link" href="https://github.com/Sarbsey/VibeCheck">
                                     Github
                                 </a>
                             </li>
@@ -235,7 +235,7 @@ also consider React for interactivity -->
                         <!-- This should be an ordered list that leads to multiple other pages with more information on their respective topic -->
                         <ul class="footer-ul">
                             <li class="footer-li">
-                                <a class="footer-sub-link" href="https://twitter.com/spotvac_music">Twitter</a>
+                                <a class="footer-sub-link" href="https://twitter.com/VibeCheck_music">Twitter</a>
                             </li>
                             <li class="footer-li">
                                 <a class="footer-sub-link" href="https://www.instagram.com/sarbsey/">Instagram</a>
